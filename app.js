@@ -1,4 +1,7 @@
 let log = null
+let info = null
+let tool = null
+
 const debug = true
 
 const app = () => {
@@ -10,17 +13,20 @@ const app = () => {
   }
 
   const runApp = () => {
-    log = tools().log
+    tool = tools()
+    log = tool.log
+    info = tool.info
 
     player().playerDetails()
 
     testStuff()
-    log(`main`, `cheese`)
+    info(`main`, `cheese`)
+    log(`mickey`, `chips`)
   }
 
 
   const testStuff = () => {
-    el( undefined, 'myTest').button( 'press me', () => {console.log(`clickety`);})
+    el( undefined, 'myTest').button( 'press me', () => {log(`clickety`);})
   }
 
   return {

@@ -3,17 +3,11 @@ const player = () => {
 
 
   const showPlayerDetails = () => {
-    d = document.createElement('div')
-    d.innerHTML = `Player name: ${s.p.name}`
-    document.getElementById('app').appendChild(d)
-    el('myId').div();
+    e = el().div(`Player name: ${s.p.name}`)
   }
 
   const playerInputs = () => {
-    pn = document.createElement('input')
-    pn.id = 'playerName'
-    document.getElementById('playerForm').appendChild(pn)
-
+    e = el('playerForm', undefined, 'playerName').input()
   };
 
   const newPlayerName = () => {
@@ -29,15 +23,11 @@ const player = () => {
   }
 
   const button = () => {
-    el('playerName', 'playerForm').button( 'OK', newPlayerName)
+    el('playerForm', 'buttonClass', 'playerNameOKButton' ).button( 'OK', newPlayerName)
   }
 
   const playerForm = () => {
-    pd = document.createElement('div')
-    t = document.createTextNode('Player')
-    pd.id = "playerForm"
-    pd.appendChild(t)
-    document.getElementById('app').appendChild(pd)
+    e = el(undefined, undefined, 'playerForm').div('Player')
   }
 
   const killPlayerForm = () => {

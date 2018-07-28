@@ -9,7 +9,7 @@ const autoload = () => {
     const path = "/_builds/projects/clearing/"
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
-    s.fl.push(`${path}app/characters.js`)        
+    s.fl.push(`${path}app/characters.js`)
     s.fl.push(`${path}app/player.js`)
 
     s.fc = s.fl.length

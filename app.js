@@ -1,23 +1,26 @@
+let log = null
+const debug = true
+
 const app = () => {
-  let x = {}
+  let s = {}
 
   const main = () => {
-      console.log(`main`)
-      autoload().loadFiles()
-      document.addEventListener('clearing_loaded', runApp)
+    autoload().loadFiles()
+    document.addEventListener('clearing_loaded', runApp)
   }
 
   const runApp = () => {
-    console.log('runApp');
+    log = tools().log
+
     player().playerDetails()
 
-
     testStuff()
+    log(`main`, `cheese`)
   }
 
 
   const testStuff = () => {
-    el('myTest').button( 'press me', 'app', () => {console.log('clickety');})
+    el( undefined, 'myTest').button( 'press me', () => {console.log(`clickety`);})
   }
 
   return {

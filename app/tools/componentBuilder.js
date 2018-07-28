@@ -1,9 +1,12 @@
-const el = (id = null, parent = 'app') => {
-  console.log(id);
+const el = (parent = 'app', className = '', id = '' ) => {
+
   let s = {}
   s.id = id
+  s.class = className
   s.parent = parent
-  const div = (className = null) => {
+
+
+  const testdiv = (className = null) => {
     e = document.createElement('div')
     e.id = s.id
     e.className = className
@@ -11,21 +14,39 @@ const el = (id = null, parent = 'app') => {
     document.getElementById('app').appendChild(e)
   }
 
-  const inputBox = () => {
-    e = document.createElement('input')
+  const div = (divText = '') => {
+    e = document.createElement('div')
+    text(e, divText)
+    append(e)
+    return e
+  }
+
+  const input = () => {
+    let e = document.createElement('input')
+    append(e)
+    return e
   }
 
   const displayBox = () => {
 
   }
 
+  const append = (e) => {
+    if (s.id != '') e.id = s.id
+    if (s.class != '') e.className = s.class
+    document.getElementById(s.parent).appendChild(e)
+  }
+
+  const text = (e, t) => {
+    if (t != '') e.appendChild(document.createTextNode(t))
+  }
+
   const button = (buttonText = 'OK', buttonOnClick = defaultButtonClick) => {
-    b = document.createElement('div')
-    b.appendChild(document.createTextNode(buttonText))
-    document.getElementById(s.parent).appendChild(b)
-    b.onclick = () => {
-      buttonOnClick()
-    }
+    let e = document.createElement('div')
+    text(e, buttonText)
+    e.onclick = () => { buttonOnClick() }
+    append(e)
+    return e
   }
 
   const defaultButtonClick = () => {
@@ -36,7 +57,7 @@ const el = (id = null, parent = 'app') => {
   return {
     div: div,
     button: button,
-    inputBox: inputBox,
+    input: input,
     displayBox: displayBox,
   }
 }

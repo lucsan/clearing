@@ -3,23 +3,20 @@ const player = () => {
 
 
   const showPlayerDetails = () => {
-    e = el().div(`Player name: ${s.p.name}`)
+    let e = el().div(`Player name: ${s.p.name}`)
   }
 
   const playerInputs = () => {
-    e = el('playerForm', undefined, 'playerName').input()
+    let e = el('playerForm', undefined, 'playerName').input()
   };
 
   const newPlayerName = () => {
-    pn = document.getElementById('playerName')
-    if (pn.value != '') {
-      localStorage.setItem('player',
-      JSON.stringify({
-        name: pn.value,
-      }))
+    let p = document.getElementById('playerName')
+    if (p.value != '') {
+      tool.storeData('player', {name: p.value} )
       killPlayerForm()
     }
-    console.log(`ok clicked ${pn.value}`)
+    log(`ok clicked ${p.value}`)
   }
 
   const button = () => {
@@ -27,12 +24,12 @@ const player = () => {
   }
 
   const playerForm = () => {
-    e = el(undefined, undefined, 'playerForm').div('Player')
+    let e = el(undefined, undefined, 'playerForm').div('Player')
   }
 
   const killPlayerForm = () => {
-    let el = document.getElementById('playerForm')
-    el.parentNode.removeChild(el)
+    let e = document.getElementById('playerForm')
+    e.parentNode.removeChild(e)
     loadPlayer()
   }
 
@@ -42,7 +39,7 @@ const player = () => {
       loadPlayerForm()
     } else {
       s.p = JSON.parse(p)
-      console.log(`found player in localstorage - ps ${s.p.name}`)
+      log(`found player in localstorage - ps ${s.p.name}`)
       showPlayerDetails()
     }
   }
@@ -57,6 +54,5 @@ const player = () => {
       playerDetails: loadPlayer,
 
   }
-
 
 }

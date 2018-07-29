@@ -20,7 +20,7 @@ const app = () => {
     player().playerDetails()
 
     testStuff()
-    info(`main`, `cheese`)
+    info(`main`, s)
     log(`mickey`, `chips`)
   }
 

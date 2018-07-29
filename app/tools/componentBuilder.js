@@ -53,11 +53,16 @@ const el = (parent = 'app', className = '', id = '' ) => {
     console.log('Button Clicked')
   }
 
+  const removeElement = (id) => {
+    let e = document.getElementById(id)
+    e.parentNode.removeChild(e)
+  }
 
   return {
     div: div,
     button: button,
     input: input,
     displayBox: displayBox,
+    removeElement: removeElement,
   }
 }

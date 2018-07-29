@@ -1,3 +1,4 @@
+'use strict'
 let log = null
 let info = null
 let tool = null
@@ -10,6 +11,8 @@ const app = () => {
   const main = () => {
     autoload().loadFiles()
     document.addEventListener('clearing_loaded', runApp)
+    document.addEventListener('clearing_playerLoaded', loadCharacters)
+
   }
 
   const runApp = () => {
@@ -17,11 +20,17 @@ const app = () => {
     log = tool.log
     info = tool.info
 
+    el(undefined, undefined, 'playerDetails').div()
+    el(undefined, undefined, 'charactersDetails').div()
     player().playerDetails()
 
     testStuff()
     info(`main`, s)
     log(`mickey`, `chips`)
+  }
+
+  const loadCharacters = () => {
+    characters().loadCharacters()
   }
 
 

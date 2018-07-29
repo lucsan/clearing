@@ -1,9 +1,9 @@
 const player = () => {
   let s = {}
 
-
   const showPlayerDetails = () => {
-    let e = el().div(`Player name: ${s.p.name}`)
+    document.dispatchEvent(new Event('clearing_playerLoaded'))
+    let e = el('playerDetails').div(`Player name: ${s.p.name}`)
   }
 
   const playerInputs = () => {
@@ -24,7 +24,7 @@ const player = () => {
   }
 
   const playerForm = () => {
-    let e = el(undefined, undefined, 'playerForm').div('Player')
+    let e = el('playerDetails', undefined, 'playerForm').div('Player')
   }
 
   const killPlayerForm = () => {

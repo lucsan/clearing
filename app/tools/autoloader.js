@@ -9,8 +9,14 @@ const autoload = () => {
     const path = "/_builds/projects/clearing/"
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
-    s.fl.push(`${path}app/characters.js`)
-    s.fl.push(`${path}app/player.js`)
+    s.fl.push(`${path}app/tools/tokenizer.js`)
+    s.fl.push(`${path}app/components/characters.js`)
+    s.fl.push(`${path}app/components/player.js`)
+    s.fl.push(`${path}app/components/controls.js`)
+    s.fl.push(`${path}app/components/playarea.js`)
+    s.fl.push(`${path}app/components/game.js`)
+    s.fl.push(`${path}app/data/base.js`)
+    s.fl.push(`${path}app/data/exits.js`)    
 
     s.fc = s.fl.length
     for (f of s.fl) {

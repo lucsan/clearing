@@ -2,6 +2,7 @@
 let log = null
 let info = null
 let tool = null
+let character = null
 
 const debug = true
 
@@ -12,6 +13,7 @@ const app = () => {
     autoload().loadFiles()
     document.addEventListener('clearing_loaded', runApp)
     document.addEventListener('clearing_playerLoaded', loadCharacters)
+    document.addEventListener('clearing_characterLoaded', loadControls)
 
   }
 
@@ -20,8 +22,11 @@ const app = () => {
     log = tool.log
     info = tool.info
 
-    el(undefined, undefined, 'playerDetails').div()
-    el(undefined, undefined, 'charactersDetails').div()
+    el(undefined, 'display', 'playerDetails').div()
+    el(undefined, 'display', 'charactersDetails').div()
+    el(undefined, 'display', 'playArea').div()
+    el(undefined, 'display', 'controls').div()
+
     player().playerDetails()
 
     testStuff()
@@ -33,8 +38,17 @@ const app = () => {
     characters().loadCharacters()
   }
 
+  const loadControls = () => {
+    console.log('char', character);
+
+    let t = base[character.location]
+    controls().loadControls()
+    playarea().loadResponses(t)
+  }
+
 
   const testStuff = () => {
+    console.log(base.start);
     el( undefined, 'myTest').button( 'press me', () => {log(`clickety`);})
   }
 

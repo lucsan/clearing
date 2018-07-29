@@ -55,6 +55,7 @@ const el = (parent = 'app', className = '', id = '' ) => {
 
   const removeElement = (id) => {
     let e = document.getElementById(id)
+    if (e == null) return
     e.parentNode.removeChild(e)
   }
 

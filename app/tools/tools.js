@@ -24,6 +24,10 @@ const tools = () => {
     localStorage.setItem(s, JSON.stringify(o))
   }
 
+  const clearAllStorage = () => {
+    localStorage.clear()
+  }
+
   return {
     log: log,
     info: info,

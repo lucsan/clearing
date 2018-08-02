@@ -1,11 +1,11 @@
 const playarea = () => {
 
-  const loadResponses = (r) => {
+  const loadPlayarea = (r) => {
     el().removeElement('responses')
     el('playArea', undefined, 'responses').div(r)
   }
 
   return {
-    loadResponses: loadResponses,
+    loadResponses: loadPlayarea,
   }
 }

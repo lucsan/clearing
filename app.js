@@ -31,7 +31,7 @@ const app = () => {
 
     testStuff()
     info(`main`, s)
-    log(`mickey`, `chips`)
+    //log(`mickey`, `chips`)
   }
 
   const loadCharacters = () => {
@@ -41,14 +41,14 @@ const app = () => {
   const loadControls = () => {
     console.log('char', character);
 
-    let t = base[character.location]
+    let t = places[character.location].desc
     controls().loadControls()
     playarea().loadResponses(t)
   }
 
 
   const testStuff = () => {
-    console.log(base.start);
+    //console.log(base.start);
     el( undefined, 'myTest').button( 'press me', () => {log(`clickety`);})
   }
 

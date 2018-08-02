@@ -46,7 +46,13 @@ const characters = () => {
   const newCharacter = () => {
     let c = document.getElementById('charName')
     if (c != null) {
-      tool.storeData('characters', [{ name: c.value, location: 'start' }])
+      tool.storeData('characters', [
+        {
+          name: c.value,
+          location: 'start',
+          inventory: ['lint',],
+        }
+      ])
       el().removeElement('charForm')
     }
   }

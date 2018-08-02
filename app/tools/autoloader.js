@@ -15,8 +15,8 @@ const autoload = () => {
     s.fl.push(`${path}app/components/controls.js`)
     s.fl.push(`${path}app/components/playarea.js`)
     s.fl.push(`${path}app/components/game.js`)
-    s.fl.push(`${path}app/data/base.js`)
-    s.fl.push(`${path}app/data/exits.js`)    
+    s.fl.push(`${path}app/data/places.js`)
+    s.fl.push(`${path}app/data/things.js`)
 
     s.fc = s.fl.length
     for (f of s.fl) {

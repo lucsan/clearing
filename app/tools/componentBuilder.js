@@ -44,7 +44,7 @@ const el = (parent = 'app', className = '', id = '' ) => {
   const button = (buttonText = 'OK', buttonOnClick = defaultButtonClick) => {
     let e = document.createElement('div')
     text(e, buttonText)
-    e.onclick = () => { buttonOnClick() }
+    e.addEventListener("click", buttonOnClick)
     append(e)
     return e
   }

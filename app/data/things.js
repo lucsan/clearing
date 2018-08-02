@@ -1,7 +1,7 @@
 const things = {
   //
   stick: {
-    desc: "It's a nice stick.",
+    desc: "A nice stick.",
     locs: ['start'],
     actions: {
       hit: '',
@@ -15,7 +15,7 @@ const things = {
   },
 
   dwarf: {
-    desc: "It's a nice dwarf.",
+    desc: "A nice dwarf.",
     locs: ['start'],
     actions: {
       speak: '',
@@ -23,12 +23,16 @@ const things = {
   },
 
   lint: {
-    desc: "It's grey and fluffy.",
+    desc: "Looks grey and fluffy.",
     locs: ['inv'],
     actions: {
       sniff: '',
       throw: '',
     },
   },
+
+  penny: {
+    desc: 'A shinny penny.'
+  }
 
 }

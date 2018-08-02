@@ -1,7 +1,12 @@
 const controls = () => {
 
   const loadControls = () => {
-    el('controls', undefined, 'playerMove').input()
+    let e = el('controls', undefined, 'playerMove').input()
+    e.addEventListener("keydown", (event) => {
+      if (event.key === 'Enter') {
+        playerMove()
+      }
+    })
     el('controls').button('PLAY', playerMove)
   }
 

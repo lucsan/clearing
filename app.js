@@ -43,7 +43,8 @@ const app = () => {
 
     let t = places[character.location].desc
     controls().loadControls()
-    playarea().loadResponses(t)
+    playarea().loadLocation()
+    //playarea().loadResponses(t)
   }
 
 

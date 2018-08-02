@@ -3,10 +3,15 @@ const places = {
   start: {
     desc: 'You are standing in a clearing',
     exits: [
-      { dir: 'The North',
-        desc: 'A path runs north',
+      { id: 'north',
+        desc: 'A path runs northwards.',
         to: 'woods',
-      }
+      },
+      {
+        id: 'South',
+        desc: 'To the south is a small wooden door.',
+        to: 'tree',
+      },
     ]
   },
   woods: {

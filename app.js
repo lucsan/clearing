@@ -30,7 +30,7 @@ const app = () => {
     el(undefined, 'display', 'Inventory').div()
     el(undefined, 'display', 'playArea').div()
     el(undefined, 'display', 'controls').div()
-    el(undefined, 'display', 'teastArea').div()
+    el(undefined, 'display', 'testArea').div()
 
     player().playerDetails()
 
@@ -56,7 +56,8 @@ const app = () => {
 
   const testStuff = () => {
     //console.log(base.start);
-    el( 'teastArea', undefined, 'myTest').button( 'pick up stick test', s.actions['pick up']  )
+    el( 'testArea', undefined, 'pickUpTest').button( 'pick up stick test', s.actions['pick up']  )
+    el( 'testArea', undefined, 'moveNorthTest').button( 'move north test', game().playerMove('north')  )
   }
 
 

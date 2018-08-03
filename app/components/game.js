@@ -1,8 +1,15 @@
 const game = () => {
 
+  // const playerMove = (m) => {
+  //   let r = analyse(m)
+  //   playarea().loadResponses(r)
+  // }
+
   const playerMove = (m) => {
-    let r = analyse(m)
-    playarea().loadResponses(r)
+    // Check player can move to that exit
+    // find place exit leads to
+    // move player
+
   }
 
   const analyse = (m) => {
@@ -64,6 +71,7 @@ const game = () => {
   const listInventory = () => {
     console.log(character.inventory);
   }
+
 
   return {
     getThing: getThing,

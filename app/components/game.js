@@ -1,4 +1,5 @@
 const game = () => {
+
   const playerMove = (m) => {
     let r = analyse(m)
     playarea().loadResponses(r)
@@ -6,8 +7,6 @@ const game = () => {
 
   const analyse = (m) => {
     let response = ""
-
-
 
 
     response = m
@@ -41,9 +40,36 @@ const game = () => {
     console.log(o);
   }
 
+  const addToInventory = (id, remove) => {
+
+
+
+
+
+      for (let i in things[id].locs) {
+        if (character.location == things[id].locs[i]) {
+          if (remove != false) {
+            things[id].locs.splice(i, 1)
+          }
+          character.inventory.push(id)
+        }
+      }
+
+      console.log(things[id]);
+
+    console.log(character.inventory);
+
+  }
+
+  const listInventory = () => {
+    console.log(character.inventory);
+  }
+
   return {
     getThing: getThing,
+    addToInventory: addToInventory,
     gatherActions: gatherActionsAtLocation,
+    listInventory: listInventory,
     playerMove: playerMove,
   }
 }

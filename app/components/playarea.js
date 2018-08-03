@@ -18,6 +18,11 @@ const playarea = () => {
 
     thingsText = "You can see: "
     let things = findThingsAtLocation()
+    placeThingsAtLocation(things)
+
+  }
+
+  const placeThingsAtLocation = (things) => {
     for (let thing of things) {
       thingsText += thing.desc + " "
     }

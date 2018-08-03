@@ -1,10 +1,10 @@
-const things = {
+const thingsList = {
   //
   stick: {
     desc: "A nice stick.",
-    locs: ['start'],
+    locs: ['start', 'woods'],
     actions: {
-      'pick up': () => game().getThing(things.stick),
+      'pick up': () => game().addToInventory('stick', true),
       hit: '',
       poke: '',
     },

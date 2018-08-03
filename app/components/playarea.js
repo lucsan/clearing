@@ -16,7 +16,7 @@ const playarea = () => {
 
     el('playArea', undefined, 'exits').div(exitsText)
 
-    thingsText = ""
+    thingsText = "You can see: "
     let things = findThingsAtLocation()
     for (let thing of things) {
       thingsText += thing.desc + " "

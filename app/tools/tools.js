@@ -4,7 +4,7 @@ const tools = () => {
 
   const log = (...v) => {
     if (debug != true) return
-    v.map((e) => { console.log(e); logToStore(e) })
+    v.map((e) => { logToStore(e) })
   }
 
   const info = (...v) => {

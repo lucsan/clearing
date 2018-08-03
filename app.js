@@ -12,8 +12,8 @@ const app = () => {
   const main = () => {
     autoload().loadFiles()
     document.addEventListener('clearing_loaded', runApp)
-    document.addEventListener('clearing_playerLoaded', loadCharacters)
-    document.addEventListener('clearing_characterLoaded', loadControls)
+    document.addEventListener('clearing_playerLoaded', loadCharacter)
+    document.addEventListener('clearing_characterLoaded', loadComponents)
 
   }
 
@@ -29,29 +29,33 @@ const app = () => {
 
     player().playerDetails()
 
-    testStuff()
+
     info(`main`, s)
     //log(`mickey`, `chips`)
   }
 
-  const loadCharacters = () => {
-    characters().loadCharacters()
-  }
-
-  const loadControls = () => {
-    console.log('char', character);
-
-    let t = places[character.location].desc
-    controls().loadControls()
-    playarea().loadLocation()
-    //playarea().loadResponses(t)
-  }
-
-
   const testStuff = () => {
     //console.log(base.start);
-    el( undefined, 'myTest').button( 'press me', () => {log(`clickety`);})
+    el( undefined, undefined, 'myTest').button( 'press me', s.actions['pick up']  )
   }
+
+  const loadCharacter = () => {
+    characters().loadCharacters()
+
+  }
+
+  const loadComponents = () => {
+    //console.log('char', character);
+    s.actions = game().gatherActions()
+    let t = places[character.location].desc
+    controls().loadControls()
+    playarea().loadLocation(s)
+    //playarea().loadResponses(t)
+        testStuff()
+  }
+
+
+
 
   return {
     runApp: runApp,

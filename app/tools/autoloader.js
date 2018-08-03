@@ -1,5 +1,3 @@
-console.log('autoloader loaded')
-
 const autoload = () => {
   let s = {}
   s.fl = []
@@ -17,6 +15,7 @@ const autoload = () => {
     s.fl.push(`${path}app/components/game.js`)
     s.fl.push(`${path}app/data/places.js`)
     s.fl.push(`${path}app/data/things.js`)
+    s.fl.push(`${path}app/data/lexicon.js`)
 
     s.fc = s.fl.length
     for (f of s.fl) {

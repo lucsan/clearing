@@ -4,6 +4,7 @@ const things = {
     desc: "A nice stick.",
     locs: ['start'],
     actions: {
+      'pick up': () => game().getThing(things.stick),
       hit: '',
       poke: '',
     },

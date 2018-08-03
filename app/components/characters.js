@@ -26,7 +26,7 @@ const characters = () => {
     }
     let i = 0
     for (let c of cs) {
-      console.log(c, c.name);
+      //console.log(c, c.name);
       el('charactersDetails').div(`Char name: ${c.name}`)
       el('characterDetails').button('OK', () => {characterSelected(c.name)})
     }

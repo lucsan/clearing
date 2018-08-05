@@ -54,6 +54,7 @@ const characters = () => {
         }
       ])
       el().removeElement('charForm')
+      loadCharacters()
     }
   }
 

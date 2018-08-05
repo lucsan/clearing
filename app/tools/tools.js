@@ -24,6 +24,10 @@ const tools = () => {
     localStorage.setItem(s, JSON.stringify(o))
   }
 
+  const storeRemoveItem = (s) => {
+    localStorage.removeItem(s)
+  }
+
   const clearAllStorage = () => {
     localStorage.clear()
   }
@@ -33,6 +37,7 @@ const tools = () => {
     info: info,
     loadData: loadData,
     storeData: storeData,
+    storeRemoveItem: storeRemoveItem,
   }
 
 }

@@ -8,6 +8,7 @@ const autoload = () => {
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
     s.fl.push(`${path}app/tools/tokenizer.js`)
+    s.fl.push(`${path}app/components/stage.js`)
     s.fl.push(`${path}app/components/characters.js`)
     s.fl.push(`${path}app/components/player.js`)
     s.fl.push(`${path}app/components/controls.js`)

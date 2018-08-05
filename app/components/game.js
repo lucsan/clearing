@@ -49,10 +49,6 @@ const game = () => {
 
   const addToInventory = (id, remove) => {
 
-
-
-
-
       for (let i in things[id].locs) {
         if (character.location == things[id].locs[i]) {
           if (remove != false) {

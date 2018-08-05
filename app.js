@@ -25,12 +25,7 @@ const app = () => {
     log = tool.log
     info = tool.info
 
-    el(undefined, 'display', 'playerDetails').div()
-    el(undefined, 'display', 'charactersDetails').div()
-    el(undefined, 'display', 'Inventory').div()
-    el(undefined, 'display', 'playArea').div()
-    el(undefined, 'display', 'controls').div()
-    el(undefined, 'display', 'testArea').div()
+    stage().makeDisplays()
 
     player().playerDetails()
 
@@ -52,6 +47,8 @@ const app = () => {
     game().listInventory()
     //playarea().loadResponses(t)
         testStuff()
+    //document.dispatchEvent(new Event('clearing_appLoaded'))
+    //console.log('app dispatched');
   }
 
   const testStuff = () => {
@@ -64,11 +61,10 @@ const app = () => {
   return {
     runApp: runApp,
     init: () => {
-
       main()
     },
 
   };
 }
 
-app().init()
+//app().init()

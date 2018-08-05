@@ -9,7 +9,14 @@ const stage = () => {
     el(undefined, 'display', 'testArea').div()
   }
 
+  const makePlayerForm = (newPlayerName) => {
+    el('playerDetails', undefined, 'playerForm').div('Player')
+    el('playerForm', undefined, 'playerName').input()
+    el('playerForm', 'buttonClass', 'playerNameOKButton' ).button( 'OK', newPlayerName)
+  }
+
   return {
     makeDisplays: makeDisplays,
+    makePlayerForm: makePlayerForm,
   }
 }

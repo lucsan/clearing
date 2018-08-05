@@ -26,9 +26,9 @@ const runner = () => {
     document.getElementById('playerName').value = s.playerName
     document.getElementById('playerNameOKButton').click()
 
-    // document.getElementById('charName').value = s.charName
-    // document.getElementById('charNameOKButton').click()
-    //
+    document.getElementById('charName').value = s.charName
+    document.getElementById('charNameOKButton').click()
+
     // s.actions = game().gatherActions()
     // s.actions['pick up']()
 

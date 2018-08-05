@@ -16,16 +16,18 @@ const playarea = () => {
 
     el('playArea', undefined, 'exits').div(exitsText)
 
-    thingsText = "You can see: "
-    let things = findThingsAtLocation()
-    placeThingsAtLocation(things)
+    placeThingsAtLocation()
 
   }
 
-  const placeThingsAtLocation = (things) => {
+  const placeThingsAtLocation = () => {
+    let thingsText = "You can see: "
+    let things = findThingsAtLocation()
+
     for (let thing of things) {
       thingsText += thing.desc + " "
     }
+    el().removeElement('things')
     el('playArea', undefined, 'things').div(thingsText)
   }
 
@@ -48,5 +50,6 @@ const playarea = () => {
   return {
     loadLocation: loadLocationDescription,
     loadResponses: loadResponses,
+    placeThingsAtLocation: placeThingsAtLocation,
   }
 }

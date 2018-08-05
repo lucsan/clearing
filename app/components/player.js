@@ -6,10 +6,6 @@ const player = () => {
     let e = el('playerDetails').div(`Player name: ${p.name}`)
   }
 
-  const playerInputs = () => {
-    let e = el('playerForm', undefined, 'playerName').input()
-  };
-
   const newPlayerName = () => {
     let p = document.getElementById('playerName')
     if (p.value != '') {
@@ -23,14 +19,6 @@ const player = () => {
     log(`ok clicked ${p.value}`)
   }
 
-  const button = () => {
-    el('playerForm', 'buttonClass', 'playerNameOKButton' ).button( 'OK', newPlayerName)
-  }
-
-  const playerForm = () => {
-    let e = el('playerDetails', undefined, 'playerForm').div('Player')
-  }
-
   const killPlayerForm = () => {
     let e = document.getElementById('playerForm')
     e.parentNode.removeChild(e)
@@ -39,17 +27,11 @@ const player = () => {
   const loadOrNewPlayer = () => {
     let p = tool.loadData('player')
     if (p == null) {
-      loadPlayerForm()
+        stage().makePlayerForm(newPlayerName)
     } else {
       log(`found player in localstorage - ps ${p.name}`)
       showPlayerDetails(p)
     }
-  }
-
-  const loadPlayerForm = () => {
-    playerForm()
-    playerInputs()
-    button()
   }
 
   return {

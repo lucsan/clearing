@@ -58,6 +58,7 @@ const game = () => {
         }
       }
 
+      playarea().placeThingsAtLocation()
       console.log(things[id]);
 
     console.log(character.inventory);

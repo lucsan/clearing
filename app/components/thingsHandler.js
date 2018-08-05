@@ -2,8 +2,9 @@ const thingsHandler = () => {
 
   const loadThings = () => {
     let things = thingsList
-    for (t in things) {
-      things[t].id = t
+    for (id in things) {
+      things[id].id = id
+      things[id].drop = () => {console.log(`You can drop this ${id} when I've coded it.`)}
     }
     return things
   }
@@ -23,8 +24,13 @@ const thingsHandler = () => {
     return inv
   }
 
+  const createThingwithThings = (id1, id2) => {
+
+  }
+
   return {
     things: loadThings,
     inventory: loadInventory,
+    create: createThingwithThings,
   }
 }

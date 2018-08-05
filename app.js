@@ -54,6 +54,7 @@ const app = () => {
     //console.log(base.start);
     el( 'testArea', undefined, 'pickUpTest').button( 'pick up stick test', s.actions['pick up']  )
     el( 'testArea', undefined, 'moveNorthTest').button( 'move north test', game().playerMove('north')  )
+    el( 'testArea', undefined, 'createThingTest').button( 'create thing test', thingsHandler().create('lint', 'stick')  )    
   }
 
 

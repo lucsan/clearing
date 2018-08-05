@@ -22,7 +22,7 @@ const stage = () => {
     el('InventoryList', 'inventory-title', undefined).div('Inventory')
     for (item of inventory) {
       //console.log(item);
-      el('InventoryList', 'inventory-item', undefined).div(item.id)
+      el('InventoryList', 'inventory-item', undefined).div(`${item.desc}`)
     }
   }
 

@@ -50,7 +50,7 @@ const characters = () => {
         {
           name: c.value,
           location: 'start',
-          inventory: ['lint',],
+          inventory: thingsHandler().inventory()
         }
       ])
       el().removeElement('charForm')

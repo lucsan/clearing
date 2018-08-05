@@ -14,6 +14,7 @@ const autoload = () => {
     s.fl.push(`${path}app/components/controls.js`)
     s.fl.push(`${path}app/components/playarea.js`)
     s.fl.push(`${path}app/components/game.js`)
+    s.fl.push(`${path}app/components/thingsHandler.js`)
     s.fl.push(`${path}app/data/places.js`)
     s.fl.push(`${path}app/data/things.js`)
     s.fl.push(`${path}app/data/lexicon.js`)

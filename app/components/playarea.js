@@ -22,13 +22,17 @@ const playarea = () => {
 
   const placeThingsAtLocation = () => {
     let thingsText = "You can see: "
+    el().removeElement('things')
+    el('playArea', undefined, 'things').div(thingsText)
+
     let things = findThingsAtLocation()
 
     for (let thing of things) {
-      thingsText += thing.desc + " "
+      //thingsText += thing.desc + " "
+      el('things', undefined, '').div(thing.desc)
+      //console.log(thing);
     }
-    el().removeElement('things')
-    el('playArea', undefined, 'things').div(thingsText)
+
   }
 
   const findThingsAtLocation = () => {

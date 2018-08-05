@@ -15,8 +15,20 @@ const stage = () => {
     el('playerForm', 'buttonClass', 'playerNameOKButton' ).button( 'OK', newPlayerName)
   }
 
+  const displayInventory = (inventory) => {
+    el().removeElement('InventoryList')
+    el('Inventory', 'inventory-contents', 'InventoryList').div()
+
+    el('InventoryList', 'inventory-title', undefined).div('Inventory')
+    for (item of inventory) {
+      //console.log(item);
+      el('InventoryList', 'inventory-item', undefined).div(item.id)
+    }
+  }
+
   return {
     makeDisplays: makeDisplays,
     makePlayerForm: makePlayerForm,
+    inventory: displayInventory,
   }
 }

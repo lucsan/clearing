@@ -20,8 +20,8 @@ const runner = () => {
 
 
   const appLoaded = () => {
-    console.log('app loaded');
-    console.log(document.getElementById('playerName'));
+    //console.log('app loaded');
+    //console.log(document.getElementById('playerName'));
 
     document.getElementById('playerName').value = s.playerName
     document.getElementById('playerNameOKButton').click()

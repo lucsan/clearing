@@ -15,12 +15,10 @@ const app = () => {
     document.addEventListener('clearing_loaded', runApp)
     document.addEventListener('clearing_playerLoaded', loadCharacter)
     document.addEventListener('clearing_characterLoaded', loadComponents)
-
-
   }
 
   const runApp = () => {
-    things = thingsList
+    things = thingsHandler().things()
     tool = tools()
     log = tool.log
     info = tool.info
@@ -44,7 +42,8 @@ const app = () => {
     let t = places[character.location].desc
     controls().loadControls()
     playarea().loadLocation(s)
-    game().listInventory()
+    //game().listInventory()
+    stage().inventory(character.inventory)
     //playarea().loadResponses(t)
         testStuff()
     //document.dispatchEvent(new Event('clearing_appLoaded'))

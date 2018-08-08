@@ -65,6 +65,10 @@ const game = () => {
     stage().inventory(character.inventory)
   }
 
+  const combineThings = (required, produces) => {
+
+  }
+
   // const listInventory = () => {
   //   console.log(character.inventory);
   // }
@@ -76,5 +80,6 @@ const game = () => {
     gatherActions: gatherActionsAtLocation,
     //listInventory: listInventory,
     playerMove: playerMove,
+    combine: combineThings,
   }
 }

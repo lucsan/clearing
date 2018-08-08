@@ -12,7 +12,10 @@ const thingsList = {
       attack: 2,
       defense: 0,
       poking: true,
-    }
+    },
+    combines: {
+      lintStick: () => game().combine(['stick', 'lint', 'stickyTape'], ['lintStick', 'stickyTape']),
+    },
   },
 
   gnome: {
@@ -29,6 +32,14 @@ const thingsList = {
     actions: {
       sniff: '',
       throw: '',
+    },
+  },
+
+  stickyTape: {
+    desc: "A roll of stickytape. Its a tape, which is sticky.",
+    locs: ['inv'],
+    properties: {
+      sticking: true,
     },
   },
 

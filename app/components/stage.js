@@ -16,14 +16,24 @@ const stage = () => {
   }
 
   const displayInventory = (inventory) => {
-    el().removeElement('InventoryList')
-    el('Inventory', 'inventory-contents', 'InventoryList').div()
+    el().removeElement('inventoryList')
+    el('Inventory', 'inventory-contents', 'inventoryList').div()
 
-    el('InventoryList', 'inventory-title', undefined).div('Inventory')
-    for (item of inventory) {
-      //console.log(item);
-      el('InventoryList', 'inventory-item', undefined).div(`${item.desc}`)
+    el('inventoryList', 'inventory-title', undefined).div('Inventory')
+    for (let item of inventory) {
+      el('inventoryList', 'inventory-item', `inventoryItem-${item.id}`).div(`${item.desc}`)
+      if (item.combines != undefined) {
+        for (let i in item.combines) {
+          for (let n in item.combines[i].needs) {
+            el(`inventoryItem-${item.id}`, 'combines', undefined).div('combo: ' + item.combines[i].needs[n])
+          }
+        }
+      }
     }
+  }
+
+  const listItemNeeds = () => {
+
   }
 
   return {

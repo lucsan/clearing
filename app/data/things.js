@@ -14,7 +14,11 @@ const thingsList = {
       poking: true,
     },
     combines: {
-      lintStick: () => game().combine(['stick', 'lint', 'stickyTape'], ['lintStick', 'stickyTape']),
+      lintStick: {
+        needs: ['lint', 'stickyTape'],
+        action: () => thingsHandler().create(['stick', stick.combines.lintStick.needs], ['lintStick', 'stickyTape']),
+      },
+
     },
   },
 
@@ -44,7 +48,7 @@ const thingsList = {
   },
 
   lintStick: {
-    desc: "A mysterious lintStick, it has some pocket lint stuck to it. I wonder what this is for?",
+    desc: "A mysterious lintstick, it has some pocket lint stuck to it. I wonder what this is for?",
     actions: {
       give: () => console.log(`Give to gnome`)
     },

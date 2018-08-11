@@ -24,34 +24,33 @@ const thingsHandler = () => {
     return inv
   }
 
-  const combineThings = (required, produces) => {
+  const findThingsInInventory = (list) => {
     let found = {}
-    for (id in required) {
-      //console.log(required[id]);
+    for (id in list) {
       for (t of character.inventory) {
-        //console.log(t.id);
-        found[required[id]] = false
-        if (required[id] == t.id) {
-          found[required[id]] = true
+        found[list[id]] = false
+        if (list[id] == t.id) {
+          found[list[id]] = true
           break
         }
       }
     }
-    console.log('found ', found);
+    return found
+  }
+
+  const combineThings = (required, produces) => {
+    found = findThingsInInventory(required)
     let missing = ''
     for (t in found) {
       if (found[t] === false) {
-        missing += t + ','
+        missing += things[t].desc + ' '
       }
     }
     if (missing.length > 0) {
       console.log('missing', missing);
-      return `missing $${missing}`
+      return `missing; ${missing}`
     }
 
-    // add new things to inv
-    // remove required things from inv
-//console.log(character.inventory);
     for (id in required) {
       for (i in character.inventory) {
         if (required[id] == character.inventory[i].id) {
@@ -59,6 +58,7 @@ const thingsHandler = () => {
         }
       }
     }
+
     for (id in produces) {
       for (i in things) {
         if (i == produces[id]) {
@@ -66,9 +66,8 @@ const thingsHandler = () => {
           break
         }
       }
-      //
+
     }
-    console.log(character.inventory);
     stage().inventory(character.inventory)
   }
 

@@ -7,7 +7,7 @@ const autoload = () => {
     const path = "/_builds/projects/clearing/"
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
-    s.fl.push(`${path}app/tools/store.js`)    
+    s.fl.push(`${path}app/tools/store.js`)
     s.fl.push(`${path}app/tools/tokenizer.js`)
     s.fl.push(`${path}app/components/stage.js`)
     s.fl.push(`${path}app/components/characters.js`)
@@ -29,7 +29,7 @@ const autoload = () => {
   const loaded = () => {
     s.fc = s.fc - 1
     if (s.fc === 0) {
-      document.dispatchEvent(new Event('clearing_loaded'))
+      document.dispatchEvent(new Event('clearing_modules_loaded'))
     }
   }
 

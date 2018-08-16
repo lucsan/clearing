@@ -32,7 +32,7 @@ const runner = () => {
     // s.actions = game().gatherActions()
     // s.actions['pick up']()
 
-    console.log('runner', s);
+    console.log('runner');
   }
 
 

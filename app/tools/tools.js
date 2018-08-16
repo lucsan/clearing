@@ -16,6 +16,10 @@ const tools = () => {
     storeData('log', logStore)
   }
 
+  const loadLog = () => {
+    return localStorage.getItem('log')
+  }
+
   const loadData = (s) => {
     return JSON.parse(localStorage.getItem(s))
   }
@@ -35,6 +39,7 @@ const tools = () => {
   return {
     log: log,
     info: info,
+    loadLog: loadLog,
     loadData: loadData,
     storeData: storeData,
     storeRemoveItem: storeRemoveItem,

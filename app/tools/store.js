@@ -1,28 +1,7 @@
 const store = () => {
 
-  const prepThingsForStorage = () => {
-    //let loc = 'start'
-
-    //character.inventory = undefined
-    if (character == undefined) {
-    //  character.inventory = {}
-      let items = prepThingsForStore('inv')
-      // console.log('char', character);
-      // tool.storeData('characters', [
-      //   {
-      //     name: character.name,
-      //     location: character.location,
-      //     inventory: items,
-      //     //inventory: thingsHandler().inventory(),
-      //     //body: () => {}
-      //   },
-      // ])
-      //character.inventory = getThingsOutOfStore(items)
-          return items
-    }
-
-
-
+  const prepThingsForStorage = (type = 'inv') => {
+    return prepThingsForStore(type)
   }
 
 

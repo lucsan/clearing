@@ -1,18 +1,18 @@
 const player = () => {
-  let s = {}
 
   const showPlayerDetails = (p) => {
-    document.dispatchEvent(new Event('clearing_playerLoaded'))
-    let e = el('playerDetails').div(`Player name: ${p.name}`)
+    document.dispatchEvent(new Event('clearing_player_loaded'))
+    stage().player(p.name)
   }
 
   const newPlayerName = () => {
-    let p = document.getElementById('playerName')
+    let p = document.getElementById('playerName') // TODO move to perform.js
     if (p.value != '') {
-      tool.storeData('player', {
-        name: p.value
+      tools().storeData('player', {
+        name: p.value,
+        chars: []
       })
-      let pl = tool.loadData('player')
+      let pl = tools().loadData('player')
       killPlayerForm()
       showPlayerDetails(pl)
     }
@@ -20,12 +20,11 @@ const player = () => {
   }
 
   const killPlayerForm = () => {
-    let e = document.getElementById('playerForm')
-    e.parentNode.removeChild(e)
+    stage().killPlayerForm()
   }
 
   const loadOrNewPlayer = () => {
-    let p = tool.loadData('player')
+    let p = tools().loadData('player')
     if (p == null) {
         stage().makePlayerForm(newPlayerName)
     } else {

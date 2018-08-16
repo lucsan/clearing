@@ -18,6 +18,20 @@ const stage = () => {
     el('playerForm', 'buttonClass', 'playerNameOKButton' ).button( 'OK', newPlayerName)
   }
 
+  const killPlayerForm = () => {
+    el().removeElement('playerForm')
+  }
+
+  const displayPlayer = (name) => {
+    el('playerDetails').div(`Player name: ${name}`)
+  }
+
+  const makeCharacterForm = (newCharacter) => {
+    el('charactersDetails', undefined, 'charForm').div('character')
+    el('charForm', undefined, 'charName').input()
+    el('charForm', 'buttonClass', 'charNameOKButton' ).button( 'OK', newCharacter)
+  }
+
   const displayInventory = (inventory) => {
     el().removeElement('inventoryList')
     el('Inventory', 'inventory-contents', 'inventoryList').div()
@@ -52,6 +66,9 @@ const stage = () => {
   return {
     makeDisplays: makeDisplays,
     makePlayerForm: makePlayerForm,
+    killPlayerForm: killPlayerForm,
+    makeCharacterForm: makeCharacterForm,
     inventory: displayInventory,
+    player: displayPlayer,
   }
 }

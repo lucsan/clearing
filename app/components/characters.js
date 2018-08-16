@@ -20,6 +20,8 @@ const characters = () => {
   const chooseCharacter = (cs) => {
     if (cs.length == 1) {
       character = cs[0]
+      character.inventory = store().getThingsOutOfStore(character.inventory)
+      
       el('charactersDetails').div(`Playing Char: ${cs[0].name}`)
       document.dispatchEvent(new Event('clearing_characterLoaded'))
       return
@@ -50,8 +52,10 @@ const characters = () => {
         {
           name: c.value,
           location: 'start',
-          inventory: thingsHandler().inventory()
-        }
+          inventory: store().prepThingsForStorage(),
+          //inventory: thingsHandler().inventory(),
+          //body: () => {}
+        },
       ])
       el().removeElement('charForm')
       loadCharacters()

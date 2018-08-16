@@ -24,15 +24,13 @@ const playarea = () => {
     let thingsText = "You can see: "
     el().removeElement('things')
     el('playArea', undefined, 'things').div(thingsText)
-
     let things = findThingsAtLocation()
-
     for (let thing of things) {
-      //thingsText += thing.desc + " "
-      el('things', undefined, '').div(thing.desc)
-      //console.log(thing);
+      el('things', undefined, `thing-${thing.id}`).div(thing.desc)
+      for (let act in thing.actions.env) {
+        el(`thing-${thing.id}`, undefined, `action`).button(act, thing.actions.env[act])
+      }
     }
-
   }
 
   const findThingsAtLocation = () => {
@@ -49,6 +47,10 @@ const playarea = () => {
       }
     }
     return thingsAtLoc
+  }
+
+  const thingActionsAtLocation = (thing) => {
+
   }
 
   return {

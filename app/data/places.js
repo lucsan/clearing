@@ -11,6 +11,11 @@ const places = {
         id: 'South',
         desc: 'To the south is a small wooden door.',
         to: 'tree',
+        actions: {
+          'open': () => {},
+          'unlock': () => {},
+          'lock': () => {},
+        },
       },
     ]
   },

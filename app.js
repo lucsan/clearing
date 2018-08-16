@@ -38,10 +38,10 @@ const app = () => {
 
   const loadComponents = () => {
     //console.log('char', character);
-    s.actions = game().gatherActions()
+    //s.actions = game().gatherActions()
     let t = places[character.location].desc
     controls().loadControls()
-    playarea().loadLocation(s)
+    playarea().loadLocation()
     //game().listInventory()
     stage().inventory(character.inventory)
     //playarea().loadResponses(t)
@@ -51,8 +51,9 @@ const app = () => {
   }
 
   const testStuff = () => {
+    //store().prepThingsForStorage()
     //console.log(base.start);
-    el( 'testArea', undefined, 'pickUpTest').button( 'pick up stick test', s.actions['pick up']  )
+    //el( 'testArea', undefined, 'pickUpTest').button( 'pick up stick test', s.actions['pick up']  )
     el( 'testArea', undefined, 'createThingTest').button( 'create thing test', () => thingsHandler().create(['stick', 'lint', 'stickyTape'], ['lintStick', 'stickyTape']) )
     el( 'testArea', undefined, 'moveNorthTest').button( 'move north test', () => game().playerMove('north')  )
 

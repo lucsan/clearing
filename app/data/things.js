@@ -4,21 +4,35 @@ const thingsList = {
     desc: "A nice stick.",
     locs: ['start', 'woods'],
     actions: {
-      'pick up': () => game().addToInventory('stick', true),
-      hit: '',
-      poke: '',
-    },
-    properties: {
-      attack: 2,
-      defense: 0,
-      poking: true,
+      // TODO pick up action, not displayed when item is in inv.
+      // TODO synonyms for pick up? remove, get, take.
+      env: {
+        'pick up': () => thingsHandler().addToInventory('stick', true),
+        'kick': () => {},
+      },
+      inv: {
+        // combines
+        // wear - put in bod
+        drop: () => {},
+        destroy: () => {},
+      },
+      bod: {
+        hit: () => {console.log('you hit');},
+        poke: () => {},
+        bag: () => {}, // put in inv
+      },
     },
     combines: {
       lintStick: {
         needs: ['lint', 'stickyTape'],
         action: () => thingsHandler().create(['stick', stick.combines.lintStick.needs], ['lintStick', 'stickyTape']),
       },
-
+    },
+    properties: {
+      attack: 2,
+      defense: 0,
+      weight: 2,
+      poking: true,
     },
   },
 
@@ -26,7 +40,9 @@ const thingsList = {
     desc: "A nice gnome.",
     locs: ['start'],
     actions: {
-      speak: '',
+      env: {
+        speak: () => {},
+      },
     },
   },
 
@@ -34,8 +50,13 @@ const thingsList = {
     desc: "Some grey and fluffy lint.",
     locs: ['inv'],
     actions: {
-      sniff: '',
-      throw: '',
+      inv: {
+        inspect: () => {console.log('inspect')},
+      },
+      bod: {
+        sniff: () => {},
+        throw: () => {},
+      },
     },
   },
 
@@ -62,6 +83,11 @@ const thingsList = {
 
   penny: {
     desc: 'A shinny penny.'
-  }
+  },
+
+  pea: {
+    desc: "A small round pea.",
+    locs: ['inv'],
+  },
 
 }

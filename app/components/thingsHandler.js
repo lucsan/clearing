@@ -1,27 +1,41 @@
 const thingsHandler = () => {
 
+/*
+  Things in inventory
+  Things in hand (head, chest, etc)
+  Things in room
+
+  Thing location, action, combines, property
+
+
+*/
+
+
   const loadThings = () => {
     let things = thingsList
     for (id in things) {
       things[id].id = id
-      things[id].drop = () => {console.log(`You can drop this ${id} when I've coded it.`)}
+      //things[id].drop = () => {console.log(`You can drop this ${id} when I've coded it.`)}
     }
     return things
   }
 
-  const loadInventory = () => {
-    let inv = []
-    for (t in things) {
+  const addThingsToList = (listOfThingsToAdd, listToAddThingsTo = []) => {
+    for (t in listOfThingsToAdd) {
       let thing = things[t]
       if (thing.locs != null) {
         for (l of thing.locs) {
           if (l == 'inv') {
-            inv.push(thing)
+            listToAddThingsTo.push(thing)
           }
         }
       }
     }
-    return inv
+    return listToAddThingsTo
+  }
+
+  const loadInventory = () => {
+     return addThingsToList(things)
   }
 
   const findThingsInInventory = (list) => {
@@ -36,6 +50,20 @@ const thingsHandler = () => {
       }
     }
     return found
+  }
+
+  const addToInventory = (id, remove) => {
+
+    for (let i in things[id].locs) {
+      if (character.location == things[id].locs[i]) {
+        if (remove != false) {
+          things[id].locs.splice(i, 1)
+        }
+        character.inventory.push(things[id])
+      }
+    }
+    playarea().placeThingsAtLocation()
+    stage().inventory(character.inventory)
   }
 
   const combineThings = (required, produces) => {
@@ -71,9 +99,30 @@ const thingsHandler = () => {
     stage().inventory(character.inventory)
   }
 
+
+  const listNeeds = (thing) => {
+
+  }
+
+  const listActions = (thing) => {
+    if (thing.actions == undefined) return
+    return thing.actions
+    // let actions = {}
+    // if (thing.actions == undefined) return actions
+    // for (let action in thing.actions) {
+    //   actions.action = thing.actions[action]})
+    // }
+    // console.log(actions);
+    // return actions
+  }
+
+
+
   return {
     things: loadThings,
     inventory: loadInventory,
     create: combineThings,
+    listActions: listActions,
+    addToInventory: addToInventory,
   }
 }

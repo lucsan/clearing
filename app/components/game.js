@@ -47,27 +47,11 @@ const game = () => {
     console.log(o);
   }
 
-  const addToInventory = (id, remove) => {
 
-      for (let i in things[id].locs) {
-        if (character.location == things[id].locs[i]) {
-          if (remove != false) {
-            things[id].locs.splice(i, 1)
-          }
-          character.inventory.push(things[id])
-        }
-      }
 
-      playarea().placeThingsAtLocation()
-      //console.log(things[id]);
-
-    //console.log(character.inventory);
-    stage().inventory(character.inventory)
-  }
-
-  const combineThings = (required, produces) => {
-
-  }
+  // const combineThings = (required, produces) => {
+  //
+  // }
 
   // const listInventory = () => {
   //   console.log(character.inventory);
@@ -76,10 +60,10 @@ const game = () => {
 
   return {
     getThing: getThing,
-    addToInventory: addToInventory,
+    //addToInventory: addToInventory,
     gatherActions: gatherActionsAtLocation,
     //listInventory: listInventory,
     playerMove: playerMove,
-    combine: combineThings,
+    //combine: combineThings,
   }
 }

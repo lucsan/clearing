@@ -1,3 +1,6 @@
+/*
+ * Write elements to the stage.
+*/
 const stage = () => {
 
   const makeDisplays = () => {
@@ -20,20 +23,30 @@ const stage = () => {
     el('Inventory', 'inventory-contents', 'inventoryList').div()
 
     el('inventoryList', 'inventory-title', undefined).div('Inventory')
-    for (let item of inventory) {
-      el('inventoryList', 'inventory-item', `inventoryItem-${item.id}`).div(`${item.desc}`)
-      if (item.combines != undefined) {
-        for (let i in item.combines) {
-          for (let n in item.combines[i].needs) {
-            el(`inventoryItem-${item.id}`, 'combines', undefined).div('combo: ' + item.combines[i].needs[n])
+
+    for (let id in inventory) {
+      el('inventoryList', 'inventory-item', `inventoryItem-${id}`).div(`${inventory[id].desc}`)
+
+      if (inventory[id].combines != undefined) {
+        for (let i in inventory[id].combines) {
+          for (let n in inventory[id].combines[i].needs) {
+            el(`inventoryItem-${inventory[id]}`, 'combines', undefined).div('combo: ' + inventory[id].combines[i].needs[n])
           }
         }
       }
+
+      //let actions = thingsHandler().listActions(item)
+      if (inventory[id].actions != undefined) {
+      console.log(id, inventory[id].actions);
+
+        for (let act in inventory[id].actions.inv) {
+          //if (item.actions.inv[i] != "") {
+            el(`inventoryItem-${id}`, 'actions', undefined).button(act, inventory[id].actions.inv[act])
+          //}
+        }
+      }
+
     }
-  }
-
-  const listItemNeeds = () => {
-
   }
 
   return {

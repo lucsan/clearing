@@ -29,8 +29,8 @@ const runner = () => {
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
 
-    s.actions = game().gatherActions()
-    s.actions['pick up']()
+    // s.actions = game().gatherActions()
+    // s.actions['pick up']()
 
     console.log('runner', s);
   }

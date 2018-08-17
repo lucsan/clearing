@@ -51,7 +51,7 @@ const stage = () => {
 
       //let actions = thingsHandler().listActions(item)
       if (inventory[id].actions != undefined) {
-      console.log(id, inventory[id].actions);
+      //console.log(id, inventory[id].actions);
 
         for (let act in inventory[id].actions.inv) {
           //if (item.actions.inv[i] != "") {
@@ -63,6 +63,38 @@ const stage = () => {
     }
   }
 
+  const displayThingsInList = (list, type, displayName) => {
+    console.log(`${displayName}List`);
+    el().removeElement(`${displayName}List`)
+    el(`${displayName}`, `${displayName}-contents`, `${displayName}List`).div(displayName)
+    for (let item in list) {
+      displayThingInList(list[item], type, displayName)
+    }
+
+  }
+
+    const displayThingInList = (item, type, displayName) => {
+      el(`${displayName}List`, `${displayName}-item`, `${displayName}Item-${item.id}`).div(`${item.desc}`)
+      displayThingActions(item, type, displayName)
+      displayThingCombines(item, type, displayName)
+    }
+
+    const displayThingActions = (item, type, displayName) => {
+      if (item.actions == undefined) return
+      for (let action in item.actions[type]) {
+        el(`${displayName}Item-${item.id}`, 'actions', undefined).button(action, item.actions[type][action])
+      }
+
+    }
+
+    const displayThingCombines = (item, type, displayName) => {
+      console.log(item);
+      if (item.combines == undefined) return
+      for (let combine in item.combines[type]) {
+
+      }
+    }
+
   return {
     makeDisplays: makeDisplays,
     makePlayerForm: makePlayerForm,
@@ -70,5 +102,6 @@ const stage = () => {
     makeCharacterForm: makeCharacterForm,
     inventory: displayInventory,
     player: displayPlayer,
+    displayThingsInList: displayThingsInList,
   }
 }

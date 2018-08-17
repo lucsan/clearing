@@ -23,8 +23,10 @@ const characters = () => {
     character.save = {}
     //character.location = tools().loadData(`${character.name}_loc`)
     character.save.inv = tools().loadData(`${character.name}_inv`)
+    character.save.bod = tools().loadData(`${character.name}_bod`)
 
     character.inventory = store().getThingsOutOfStore(character.save.inv)
+    character.body = store().getThingsOutOfStore(character.save.bod)
 
     document.dispatchEvent(new Event('clearing_character_loaded'))
 
@@ -60,26 +62,31 @@ const characters = () => {
       character.location = 'start'
       character.save = {
         name: character.name,
-        inv: store().prepThingsForStorage()
+        inv: store().prepThingsForStorage('inv'),
+        bod: store().prepThingsForStorage('bod'),
       }
-
+// console.log('cs', character.save);
+// console.log('body', store().prepThingsForStorage('bod'));
       tools().storeData(`${character.name}`, [{name: character.name, location: character.location}])
       tools().storeData(`${character.name}_inv`, character.save.inv)
-      tools().storeData(`${character.name}_bod`, ['item'])
+      tools().storeData(`${character.name}_bod`, character.save.bod)
       tools().storeData(`${character.name}_${character.location}`, ['item'])
 
-      character.inventory = store().getThingsOutOfStore(character.save.inv)
+      //character.inventory = store().getThingsOutOfStore(character.save.inv)
+      //character.body = store().getThingsOutOfStore(character.save.bod)
+
+      //console.log('bod', store().getThingsOutOfStore(character.save.bod));
 
       el().removeElement('charForm') // TODO move to stage
       let p = tools().loadData('player')
       p.chars.push(character.name)
       tools().storeData('player', p)
 
-      console.log('p', p);
+      //console.log('p', p);
 
 
       loadCharacters()
-      console.log('character', character);
+      //console.log('character', character);
 
     }
   }

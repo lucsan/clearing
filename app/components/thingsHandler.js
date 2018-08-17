@@ -59,11 +59,11 @@ const thingsHandler = () => {
         if (remove != false) {
           things[id].locs.splice(i, 1)
         }
-        character.inventory.push(things[id])
+        character.inventory[id] = things[id]
       }
     }
     playarea().placeThingsAtLocation()
-    stage().inventory(character.inventory)
+    stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
   }
 
   const combineThings = (required, produces) => {

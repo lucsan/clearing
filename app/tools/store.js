@@ -6,6 +6,7 @@ const store = () => {
 
 
   const getThingsOutOfStore = (items) => {
+    //console.log(items);
     let ts = {}
     for (let id of items) {
       ts[id] = things[id]

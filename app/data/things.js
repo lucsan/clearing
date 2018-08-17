@@ -51,7 +51,7 @@ const thingsList = {
     locs: ['inv'],
     actions: {
       inv: {
-        inspect: () => {console.log('inspect')},
+        inspect: () => {console.log('you inspect lint')},
       },
       bod: {
         sniff: () => {},
@@ -85,9 +85,9 @@ const thingsList = {
     desc: 'A shinny penny.'
   },
 
-  pea: {
-    desc: "A small round pea.",
-    locs: ['inv'],
+  badge: {
+    desc: "A little copper button badge, it says `read me`.",
+    locs: ['bod'],
   },
 
 }

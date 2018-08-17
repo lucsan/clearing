@@ -33,9 +33,16 @@ const app = () => {
 
   const characterLoaded = () => {
     let t = places[character.location].desc
-    controls().loadControls()
+    //controls().loadControls()
     playarea().loadLocation()
-    stage().inventory(character.inventory)
+    //stage().inventory(character.inventory)
+    stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
+    test()
+  }
+
+  const test = () => {
+    //let list = character.inventory
+    //stage().displayThingsInList(list, 'inv', 'Inventory')
   }
 
 

@@ -5,7 +5,7 @@ const runner = () => {
 
   const main = () => {
     s.playerName = 'MePlayer'
-    s.charName = 'cheese231'    
+    s.charName = 'cheese231'
 
     localStorage.clear()
 
@@ -26,6 +26,8 @@ const runner = () => {
 
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
+
+    things.stick.actions.env['pick up']()
 
 //console.log(things.stick.actions);
     // thingsHandler().combine(things.lintStick)

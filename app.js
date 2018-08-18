@@ -4,6 +4,7 @@ let log = null
 let info = null
 let character = {}
 let things = {}
+let places = {}
 
 const debug = true
 
@@ -33,6 +34,7 @@ const app = () => {
   }
 
   const characterLoaded = () => {
+    places = placesList
     let t = places[character.location].desc
     //controls().loadControls()
     playarea().loadLocation()

@@ -69,20 +69,45 @@ const thingsHandler = () => {
   }
 
   const addToInventory = (id, remove) => {
-    let thing = things[id]
-    for (let loc in thing.locs) {
-      if (character.location == thing.locs[loc]) {
-        if (remove != false) {
-          addInventoryActions(thing)
-          thing.locs.splice(loc, 1)
-          thing.locs.push('inv')
-        }
-        character.inventory[id] = thing
-      }
-    }
-    playarea().placeThingsAtLocation()
+    if (removeFromLocation(id) === false) return
+    character.inventory.push(id)
+    tools().storeData(character.name, character)
+    stage().placeThingsAtLocation()
     stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
   }
+
+  const removeFromLocation = (id) => {
+    let items = character.places[character.location]
+    for (let i in items) {
+      if (items[i] == id) {
+        character.places[character.location].splice(i, 1)
+        return true
+      }
+    }
+    return false
+  }
+
+  const CheckCanBePickedUp = () => {
+
+  }
+
+
+  // const addToInventory = (id, remove) => {
+  //   let thing = things[id]
+  //   for (let loc in thing.locs) {
+  //     if (character.location == thing.locs[loc]) {
+  //       if (remove != false) {
+  //         thing.locs.splice(loc, 1)
+  //         thing.locs.push('inv')
+  //         addInventoryActions(thing)
+  //       }
+  //       //character.inventory[id] = thing
+  //       character.inventory.push(id)
+  //     }
+  //   }
+  //   playarea().placeThingsAtLocation()
+  //   stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
+  // }
 
   const addInventoryActions = (thing) => {
     thing.actions.inv['wear'] = () => {console.log('put in bod');}

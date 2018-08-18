@@ -1,4 +1,4 @@
-const places = {
+const placesList = {
   // place {id name}: Description (with tokens)
   start: {
     desc: 'You are standing in a clearing',

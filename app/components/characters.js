@@ -18,12 +18,9 @@ const characters = () => {
   }
 
   const chooseCharacter = (player) => {
-
     character = tools().loadData(player.chars[0])
     document.dispatchEvent(new Event('clearing_character_loaded'))
     el('charactersDetails').div(`Char name: ${character.name}`)
-    console.log(character);
-
   }
 
   const characterSelected = (name) => {
@@ -47,8 +44,15 @@ const characters = () => {
     let p = tools().loadData('player')
     p.chars.push(character.name)
     tools().storeData('player', p)
+    newStartPlace()
     loadCharacters()
     //console.log(character);
+  }
+
+  const newStartPlace = () => {
+    places.start = store().prepThingsForStorage('start')
+    character.places = places
+    tools().storeData(`${character.name}`, character)
   }
 
 

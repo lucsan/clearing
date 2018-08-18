@@ -32,68 +32,50 @@ const stage = () => {
     el('charForm', 'buttonClass', 'charNameOKButton' ).button( 'OK', newCharacter)
   }
 
-  const displayInventory = (inventory) => {
-    el().removeElement('inventoryList')
-    el('Inventory', 'inventory-contents', 'inventoryList').div()
 
-    el('inventoryList', 'inventory-title', undefined).div('Inventory')
-
-    for (let id in inventory) {
-      el('inventoryList', 'inventory-item', `inventoryItem-${id}`).div(`${inventory[id].desc}`)
-
-      if (inventory[id].combines != undefined) {
-        for (let i in inventory[id].combines) {
-          for (let n in inventory[id].combines[i].needs) {
-            el(`inventoryItem-${inventory[id]}`, 'combines', undefined).div('combo: ' + inventory[id].combines[i].needs[n])
-          }
-        }
-      }
-
-      //let actions = thingsHandler().listActions(item)
-      if (inventory[id].actions != undefined) {
-      //console.log(id, inventory[id].actions);
-
-        for (let act in inventory[id].actions.inv) {
-          //if (item.actions.inv[i] != "") {
-            el(`inventoryItem-${id}`, 'actions', undefined).button(act, inventory[id].actions.inv[act])
-          //}
-        }
-      }
-
-    }
-  }
 
   const displayThingsInList = (list, type, displayName) => {
-    //console.log(`${displayName}List`);
     el().removeElement(`${displayName}List`)
     el(`${displayName}`, `${displayName}-contents`, `${displayName}List`).div(displayName)
-    for (let item in list) {
-      displayThingInList(list[item], type, displayName)
+    for (let i in list) {
+      displayThingInList(list[i], type, displayName)
     }
-
   }
 
-    const displayThingInList = (item, type, displayName) => {
-      el(`${displayName}List`, `${displayName}-item`, `${displayName}Item-${item.id}`).div(`${item.desc}`)
-      displayThingActions(item, type, displayName)
-      displayThingCombines(item, type, displayName)
-    }
+  const displayThingInList = (id, type, displayName) => {
+    el(`${displayName}List`, `${displayName}-item`, `${displayName}Item-${id}`).div(`${things[id].desc}`)
+    displayThingActions(id, type, displayName)
+    displayThingCombines(id, type, displayName)
+  }
 
-    const displayThingActions = (item, type, displayName) => {
-      if (item.actions == undefined) return
-      el(`${displayName}Item-${item.id}`, 'actions', `${displayName}ItemActions-${item.id}`).div()
-      for (let action in item.actions[type]) {
-        el(`${displayName}ItemActions-${item.id}`, `action ${action}`, undefined).button(action, item.actions[type][action])
+    const displayThingActions = (id, type, displayName) => {
+      let thing = things[id]
+      if (thing.actions == undefined) return
+      el(`${displayName}Item-${id}`, 'actions', `${displayName}ItemActions-${id}`).div()
+      for (let action in thing.actions[type]) {
+        el(`${displayName}ItemActions-${id}`, `action ${action}`, undefined).button(action, thing.actions[type][action])
       }
-
     }
 
-    const displayThingCombines = (item, type, displayName) => {
-      if (item['used in'] == undefined) return
-      let usedIn = item['used in']
-      el(`${displayName}Item-${item.id}`, 'combines', `${displayName}ItemCombines-${item.id}`).div('combines with')
+    const displayThingCombines = (id, type, displayName) => {
+      let thing = things[id]
+      if (thing['used in'] == undefined) return
+      let usedIn = thing['used in']
+      el(`${displayName}Item-${id}`, 'combines', `${displayName}ItemCombines-${id}`).div('combines with')
       for (let i in usedIn) {
-        el(`${displayName}ItemCombines-${item.id}`, 'combine', undefined).button(usedIn[i], () => {thingsHandler().combine(item)})
+        el(`${displayName}ItemCombines-${id}`, 'combine', undefined).button(usedIn[i], () => {thingsHandler().combine(thing)})
+      }
+    }
+
+    const placeThingsAtLocation = () => {
+      el().removeElement('things')
+      el('playArea', undefined, 'things').div("Your can see ...")
+      for (let i in character.places[character.location]) {
+        let id = character.places[character.location][i]
+        el('things', undefined, `thing-${id}`).div(things[id].desc)
+        for (let act in things[id].actions.env) {
+          el(`thing-${id}`, undefined, `action`).button(act, things[id].actions.env[act])
+        }
       }
     }
 
@@ -102,8 +84,9 @@ const stage = () => {
     makePlayerForm: makePlayerForm,
     killPlayerForm: killPlayerForm,
     makeCharacterForm: makeCharacterForm,
-    inventory: displayInventory,
+    //inventory: displayInventory,
     player: displayPlayer,
     displayThingsInList: displayThingsInList,
+    placeThingsAtLocation: placeThingsAtLocation,
   }
 }

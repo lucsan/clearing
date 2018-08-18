@@ -3,7 +3,7 @@
 let log = null
 let info = null
 let character = {}
-let things = null
+let things = {}
 
 const debug = true
 
@@ -22,6 +22,7 @@ const app = () => {
     log = tools().log
     info = tools().info
     things = thingsHandler().things()
+    thingsHandler().combos()
     stage().makeDisplays()
     player().playerDetails()
   }

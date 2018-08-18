@@ -1,5 +1,4 @@
 const tools = () => {
-  let s = {}
   let logStore = []
 
   const log = (...v) => {

@@ -64,7 +64,7 @@ const stage = () => {
   }
 
   const displayThingsInList = (list, type, displayName) => {
-    console.log(`${displayName}List`);
+    //console.log(`${displayName}List`);
     el().removeElement(`${displayName}List`)
     el(`${displayName}`, `${displayName}-contents`, `${displayName}List`).div(displayName)
     for (let item in list) {
@@ -81,17 +81,19 @@ const stage = () => {
 
     const displayThingActions = (item, type, displayName) => {
       if (item.actions == undefined) return
+      el(`${displayName}Item-${item.id}`, 'actions', `${displayName}ItemActions-${item.id}`).div()
       for (let action in item.actions[type]) {
-        el(`${displayName}Item-${item.id}`, 'actions', undefined).button(action, item.actions[type][action])
+        el(`${displayName}ItemActions-${item.id}`, `action ${action}`, undefined).button(action, item.actions[type][action])
       }
 
     }
 
     const displayThingCombines = (item, type, displayName) => {
-      console.log(item);
-      if (item.combines == undefined) return
-      for (let combine in item.combines[type]) {
-
+      if (item['used in'] == undefined) return
+      let usedIn = item['used in']
+      el(`${displayName}Item-${item.id}`, 'combines', `${displayName}ItemCombines-${item.id}`).div('combines with')
+      for (let i in usedIn) {
+        el(`${displayName}ItemCombines-${item.id}`, 'combine', undefined).button(usedIn[i], () => {thingsHandler().combine(item)})
       }
     }
 

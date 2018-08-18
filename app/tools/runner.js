@@ -1,13 +1,11 @@
 const runner = () => {
 
-  //console.log('runner');
   let s = {}
-  s.playerName = 'MePlayer'
-  s.charName = 'cheese231'
 
 
   const main = () => {
-    //document.addEventListener('clearing_appLoaded', appLoaded)
+    s.playerName = 'MePlayer'
+    s.charName = 'cheese231'    
 
     localStorage.clear()
 
@@ -28,6 +26,11 @@ const runner = () => {
 
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
+
+//console.log(things.stick.actions);
+    // thingsHandler().combine(things.lintStick)
+    // things.stick.actions.env['pick up']()
+    // thingsHandler().combine(things.lintStick)
 
     // s.actions = game().gatherActions()
     // s.actions['pick up']()

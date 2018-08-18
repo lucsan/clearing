@@ -22,12 +22,6 @@ const thingsList = {
         bag: () => {}, // put in inv
       },
     },
-    combines: {
-      lintStick: {
-        needs: ['lint', 'stickyTape'],
-        action: () => thingsHandler().create(['stick', stick.combines.lintStick.needs], ['lintStick', 'stickyTape']),
-      },
-    },
     properties: {
       attack: 2,
       defense: 0,
@@ -79,6 +73,12 @@ const thingsList = {
       poking: true,
       tickling: () => console.log(`You tickle something with it`)
     },
+    combines: {
+      needs: ['stick', 'lint', 'stickyTape'],
+      destroys: ['stick', 'lint'],
+      desc: "You use a piece of sticky tape to adhere the lint to your stick. Yay, a lintstick, its more stick than lint and has a sticky linty end."
+      //action: () => thingsHandler().create(['stick', 'lint', 'stickyTape'], ['stick', 'lint']),
+    },
   },
 
   penny: {
@@ -86,7 +86,7 @@ const thingsList = {
   },
 
   badge: {
-    desc: "A little copper button badge, it says `read me`.",
+    desc: "A little copper button badge, it says `Adventurer #1`.",
     locs: ['bod'],
   },
 

@@ -19,31 +19,11 @@ const characters = () => {
 
   const chooseCharacter = (player) => {
 
-    character = tools().loadData(player.chars[0])[0]
-    character.save = {}
-    //character.location = tools().loadData(`${character.name}_loc`)
-    character.save.inv = tools().loadData(`${character.name}_inv`)
-    character.save.bod = tools().loadData(`${character.name}_bod`)
-
-    character.inventory = store().getThingsOutOfStore(character.save.inv)
-    character.body = store().getThingsOutOfStore(character.save.bod)
-
+    character = tools().loadData(player.chars[0])
     document.dispatchEvent(new Event('clearing_character_loaded'))
+    el('charactersDetails').div(`Char name: ${character.name}`)
+    console.log(character);
 
-    // if (player.chars.length == 1) {
-    //   character = player.chars[0]
-    //   character.inventory = store().getThingsOutOfStore(character.save.inv)
-    //
-    //   el('charactersDetails').div(`Playing Char: ${cs[0].name}`)
-    //   document.dispatchEvent(new Event('clearing_characterLoaded'))
-    //   return
-    // }
-    // let i = 0
-    // for (let c of cs) {
-    //   //console.log(c, c.name);
-    //   el('charactersDetails').div(`Char name: ${c.name}`)
-    //   el('characterDetails').button('OK', () => {characterSelected(c.name)})
-    // }
   }
 
   const characterSelected = (name) => {
@@ -56,57 +36,21 @@ const characters = () => {
   }
 
   const newCharacter = () => {
-    let c = document.getElementById('charName') // TODO move to perform.js
-    if (c != null) {
-      character.name = c.value
-      character.location = 'start'
-      character.save = {
-        name: character.name,
-        inv: store().prepThingsForStorage('inv'),
-        bod: store().prepThingsForStorage('bod'),
-      }
-// console.log('cs', character.save);
-// console.log('body', store().prepThingsForStorage('bod'));
-      tools().storeData(`${character.name}`, [{name: character.name, location: character.location}])
-      tools().storeData(`${character.name}_inv`, character.save.inv)
-      tools().storeData(`${character.name}_bod`, character.save.bod)
-      tools().storeData(`${character.name}_${character.location}`, ['item'])
+    let charName = document.getElementById('charName') // TODO move to perform.js
+    character.name = charName.value
+    character.location = 'start'
+    character.inventory = store().prepThingsForStorage('inv')
+    character.body = store().prepThingsForStorage('bod')
+    tools().storeData(`${character.name}`, character)
 
-      //character.inventory = store().getThingsOutOfStore(character.save.inv)
-      //character.body = store().getThingsOutOfStore(character.save.bod)
-
-      //console.log('bod', store().getThingsOutOfStore(character.save.bod));
-
-      el().removeElement('charForm') // TODO move to stage
-      let p = tools().loadData('player')
-      p.chars.push(character.name)
-      tools().storeData('player', p)
-
-      //console.log('p', p);
-
-
-      loadCharacters()
-      //console.log('character', character);
-
-    }
+    el().removeElement('charForm') // TODO move to stage
+    let p = tools().loadData('player')
+    p.chars.push(character.name)
+    tools().storeData('player', p)
+    loadCharacters()
+    //console.log(character);
   }
 
-  // const newCharacter = () => {
-  //   let c = document.getElementById('charName') // TODO move to perform.js
-  //   if (c != null) {
-  //     tool.storeData('characters', [
-  //       {
-  //         name: c.value,
-  //         location: 'start',
-  //         inventory: store().prepThingsForStorage(),
-  //         //inventory: thingsHandler().inventory(),
-  //         //body: () => {}
-  //       },
-  //     ])
-  //     el().removeElement('charForm')
-  //     loadCharacters()
-  //   }
-  // }
 
   return {
     loadCharacters: loadCharacters,

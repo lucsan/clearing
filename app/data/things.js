@@ -8,7 +8,7 @@ const thingsList = {
       // TODO synonyms for pick up? remove, get, take.
       env: {
         'pick up': () => thingsHandler().addToInventory('stick', true),
-        'kick': () => {},
+        'kick': () => { stage().respond("You kick the nice stick.") },
       },
       inv: {
         // combines
@@ -65,7 +65,9 @@ const thingsList = {
   lintStick: {
     desc: "A mysterious lintstick, it has some pocket lint stuck to it. I wonder what this is for?",
     actions: {
-      give: () => console.log(`Give to gnome`)
+      env: {
+        give: () => console.log(`Give to gnome`)
+      }
     },
     properties: {
       attack: 2,
@@ -88,6 +90,16 @@ const thingsList = {
   badge: {
     desc: "A little copper button badge, it says `Adventurer #1`.",
     locs: ['bod'],
+  },
+
+  littleMonster: {
+    desc: "Oooh how cute, a little monster",
+    locs: ['woods'],
+    actions: {
+      env: {
+        hit: () => console.log(`monster is hit`)
+      },
+    },
   },
 
 }

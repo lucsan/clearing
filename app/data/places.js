@@ -21,5 +21,11 @@ const placesList = {
   },
   woods: {
     desc: 'Some nice creepy woods',
+    exits: [
+      {
+        id: 'south',
+        desc: 'A path runs south through the woods.',
+      }
+    ]
   }
 }

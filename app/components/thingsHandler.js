@@ -53,20 +53,7 @@ const thingsHandler = () => {
      return addThingsToList(things)
   }
 
-  const findThingsInInventory = (list) => {
-    let found = {}
-    for (id in list) {
-      for (t in character.inventory) {
-        let thing = character.inventory[t]
-        found[list[id]] = false
-        if (list[id] == thing.id) {
-          found[list[id]] = true
-          break
-        }
-      }
-    }
-    return found
-  }
+
 
   const addToInventory = (id, remove) => {
     if (removeFromLocation(id) === false) return
@@ -92,96 +79,62 @@ const thingsHandler = () => {
   }
 
 
-  // const addToInventory = (id, remove) => {
-  //   let thing = things[id]
-  //   for (let loc in thing.locs) {
-  //     if (character.location == thing.locs[loc]) {
-  //       if (remove != false) {
-  //         thing.locs.splice(loc, 1)
-  //         thing.locs.push('inv')
-  //         addInventoryActions(thing)
-  //       }
-  //       //character.inventory[id] = thing
-  //       character.inventory.push(id)
-  //     }
-  //   }
-  //   playarea().placeThingsAtLocation()
-  //   stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
-  // }
-
   const addInventoryActions = (thing) => {
     thing.actions.inv['wear'] = () => {console.log('put in bod');}
   }
 
+  const findThingsInInventory = (list) => {
+    let found = {}
+    for (i in list) {
+      found[list[i]] = character.inventory.find(e => { return e == list[i] })
+    }
+    return found
+  }
+
   const combineThings = (product) => {
+    //console.log(product);
     found = findThingsInInventory(product.combines.needs)
+    //console.log(found);
     let missing = ''
     for (t in found) {
-      if (found[t] === false) {
+      if (found[t] === undefined) {
         missing += things[t].desc + ' '
       }
     }
+
     if (missing.length > 0) {
-      console.log('missing', missing);
-      return `missing; ${missing}`
+      stage().respond(`missing; ${missing}`)
+      return
     }
 
 console.log('combining');
 
-  // for (i in product.combines.destroys) {
-  //   let id = product.combines.destroys[i]
-  //   console.log(character.inventory[id]);
-  //   // for (let l in character.inventory[id].locs) {
-  //   //   character.inventory[id].locs
+
+  // Remove destroyed items.
+  for (let i in character.inventory) {
+    if (found[character.inventory[i]]) {
+      character.inventory.splice(i, 1)
+    }
+  }
+
+  // add new item
+  character.inventory.push(product.id)
+
+  stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
+
+  }
+
+  // const listActions = (thing) => {
+  //   if (thing.actions == undefined) return
+  //   return thing.actions
+  //   // let actions = {}
+  //   // if (thing.actions == undefined) return actions
+  //   // for (let action in thing.actions) {
+  //   //   actions.action = thing.actions[action]})
   //   // }
-  //   .splice()
-  //   //.splice()
+  //   // console.log(actions);
+  //   // return actions
   // }
-  //   console.log(character.inventory);
-
-// console.log(character.inventory.lint);
-//     for (let i in required) {
-//       let id = required[i]
-//       console.log(id);
-//       delete character.inventory.id
-//     }
-// console.log(character.inventory.lint);
-    // for (id in required) {
-    //   for (t in character.inventory) {
-    //     if (required[id] == character.inventory[t].id) {
-    //       character.inventory.splice(i, 1)
-    //     }
-    //   }
-    // }
-
-    // for (id in produces) {
-    //   for (i in things) {
-    //     if (i == produces[id]) {
-    //       character.inventory.push(things[i])
-    //       break
-    //     }
-    //   }
-    // }
-
-    stage().inventory(character.inventory)
-  }
-
-
-  const listNeeds = (thing) => {
-
-  }
-
-  const listActions = (thing) => {
-    if (thing.actions == undefined) return
-    return thing.actions
-    // let actions = {}
-    // if (thing.actions == undefined) return actions
-    // for (let action in thing.actions) {
-    //   actions.action = thing.actions[action]})
-    // }
-    // console.log(actions);
-    // return actions
-  }
 
 
 
@@ -190,7 +143,7 @@ console.log('combining');
     combos: loadCombos,
     inventory: loadInventory,
     combine: combineThings,
-    listActions: listActions,
+    //listActions: listActions,
     addToInventory: addToInventory,
   }
 }

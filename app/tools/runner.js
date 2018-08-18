@@ -27,15 +27,14 @@ const runner = () => {
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
 
+    //things.stick.actions.env['pick up']()
+
+    thingsHandler().combine(things.lintStick)
     things.stick.actions.env['pick up']()
+    thingsHandler().combine(things.lintStick)
+    playarea().exitPlace('woods')
 
-//console.log(things.stick.actions);
-    // thingsHandler().combine(things.lintStick)
-    // things.stick.actions.env['pick up']()
-    // thingsHandler().combine(things.lintStick)
 
-    // s.actions = game().gatherActions()
-    // s.actions['pick up']()
 
     console.log('runner');
   }

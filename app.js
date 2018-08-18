@@ -34,7 +34,7 @@ const app = () => {
   }
 
   const characterLoaded = () => {
-    places = placesList
+    places = playarea().loadPlaces()
     let t = places[character.location].desc
     //controls().loadControls()
     playarea().loadLocation()

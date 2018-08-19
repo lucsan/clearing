@@ -35,6 +35,9 @@ const characters = () => {
   const newCharacter = () => {
     let charName = document.getElementById('charName') // TODO move to perform.js
     character.name = charName.value
+    character.level = 1
+    character.health = 100
+    character.health_max = 100
     character.location = 'start'
     character.inventory = store().prepThingsForStorage('inv')
     character.body = store().prepThingsForStorage('bod')

@@ -33,10 +33,11 @@ const runner = () => {
     things.stick.actions.env['pick up']()
     thingsHandler().combine(things.lintStick)
     playarea().exitPlace('woods')
-
-
+    things.stick.actions.env['pick up']()
+    things.stick.actions.inv['drop']()
 
     console.log('runner');
+    console.log('things', things);
   }
 
 

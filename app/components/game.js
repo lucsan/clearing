@@ -60,7 +60,7 @@ const game = () => {
 
   return {
     getThing: getThing,
-    //addToInventory: addToInventory,
+    //addThingToInventory: addThingToInventory,
     gatherActions: gatherActionsAtLocation,
     //listInventory: listInventory,
     playerMove: playerMove,

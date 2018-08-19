@@ -10,20 +10,38 @@ const thingsHandler = () => {
 
 */
 
+  // const drop = (id) => {
+  //   removeThingFromInventory(id, 'env')
+  //   addThingToLocation(id)
+  //
+  // }
+  //
+  // const bag = (id) => {
+  //   console.log(`you can hold the ${id} when I code hold.`);
+  // }
+
+  const loadThing = (thing) => {
+    if (thing.locs == undefined) thing.locs = []
+    if (thing.actions == undefined) thing.actions = {}
+    if (thing.actions.inv == undefined) thing.actions.inv = {}
+    if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { removeThingFromInventory(thing.id, 'env') }
+    //if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { removeThingFromInventory(thing.id, 'bod') }
+  }
+
+
 
   const loadThings = () => {
     log('loading things')
     let things = thingsList
     for (id in things) {
-      things[id].id = id
-      if (things[id].locs == undefined) { things[id].locs = [] }
-      //things[id].drop = () => {console.log(`You can drop this ${id} when I've coded it.`)}
+      let thing = things[id]
+      thing.id = id
+      loadThing(thing)
     }
     return things
   }
 
   const loadCombos = () => {
-
     for (id in things) {
       if (things[id].combines == undefined ) continue
       let thing = things[id]
@@ -33,7 +51,6 @@ const thingsHandler = () => {
       }
     }
   }
-
 
   const addThingsToList = (listOfThingsToAdd, listToAddThingsTo = []) => {
     for (t in listOfThingsToAdd) {
@@ -53,17 +70,41 @@ const thingsHandler = () => {
      return addThingsToList(things)
   }
 
+  const removeThingFromInventory = (id, newLocation) => {
+    if (newLocation == undefined || newLocation == 'inv') return
+    let thing = things[id]
+    let items = character.inventory
+    console.log(newLocation);
+    for (let i in items) {
+      if (items[i] == id) {
+        character.inventory.splice(i, 1)
+      }
+    }
+    switch (newLocation) {
+      case 'env': addThingToLocation(id)
+      case 'bod': ''
+    }
 
+    stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
+    stage().placeThingsAtLocation()
+    console.log(`You can drop this ${thing.id} when I've coded it.`)
+  }
 
-  const addToInventory = (id, remove) => {
-    if (removeFromLocation(id) === false) return
+  const addThingToInventory = (id, remove) => {
+    if (removeThingFromLocation(id) === false) return
     character.inventory.push(id)
     tools().storeData(character.name, character)
     stage().placeThingsAtLocation()
     stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
   }
 
-  const removeFromLocation = (id) => {
+  const addThingToLocation = (id) => {
+    let loc = character.location
+    let place = character.places[loc]
+    place.push(id)
+  }
+
+  const removeThingFromLocation = (id) => {
     let items = character.places[character.location]
     for (let i in items) {
       if (items[i] == id) {
@@ -124,26 +165,12 @@ console.log('combining');
 
   }
 
-  // const listActions = (thing) => {
-  //   if (thing.actions == undefined) return
-  //   return thing.actions
-  //   // let actions = {}
-  //   // if (thing.actions == undefined) return actions
-  //   // for (let action in thing.actions) {
-  //   //   actions.action = thing.actions[action]})
-  //   // }
-  //   // console.log(actions);
-  //   // return actions
-  // }
-
-
-
   return {
     things: loadThings,
     combos: loadCombos,
     inventory: loadInventory,
     combine: combineThings,
     //listActions: listActions,
-    addToInventory: addToInventory,
+    addThingToInventory: addThingToInventory,
   }
 }

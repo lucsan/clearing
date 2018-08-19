@@ -1,0 +1,15 @@
+#playerDetails { width: 200px; }
+#playerDetails div { float: right; font-style: italic; color: red; }
+
+#characterDetails { width: 200px;}
+#characterDetails div { float: right;  font-style: italic; color: red; }
+
+.title { font-weight: bold; }
+.action { color: blue; }
+.combine { color: blue; }
+
+#inventoryList { color: darkblue; }
+
+#location { color: darkgreen; }
+
+#exits { color: brown; }

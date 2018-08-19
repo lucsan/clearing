@@ -52,6 +52,7 @@ const stage = () => {
     el(`${displayName}List`, `${displayName}-item`, `${displayName}Item-${id}`).div(`${things[id].desc}`)
     displayThingActions(id, type, displayName)
     displayThingCombines(id, type, displayName)
+    displayThingProperties(id, type, displayName)
   }
 
     const displayThingActions = (id, type, displayName) => {
@@ -70,6 +71,15 @@ const stage = () => {
       el(`${displayName}Item-${id}`, 'combines', `${displayName}ItemCombines-${id}`).div('combines to make ...')
       for (let i in usedIn) {
         el(`${displayName}ItemCombines-${id}`, 'combine', undefined).button(usedIn[i], () => {thingsHandler().combine(things[usedIn[i]])})
+      }
+    }
+
+    const displayThingProperties = (id, type, displayName) => {
+      let thing = things[id]
+      if (thing.properties == undefined) return
+      el(`${displayName}Item-${id}`, 'properties', `${displayName}ItemProperties-${id}`).div('Properties ...')
+      for (let property in thing.properties) {
+        el(`${displayName}ItemProperties-${id}`, 'properties', undefined).div(`${property}: ${thing.properties[property]}`)
       }
     }
 

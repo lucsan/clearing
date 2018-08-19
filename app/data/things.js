@@ -45,11 +45,11 @@ const thingsList = {
     locs: ['inv'],
     actions: {
       inv: {
-        inspect: () => {console.log('you inspect lint')},
+        inspect: () => { stage().respond(`Its lint, like you get from your pocket.`) },
       },
       bod: {
-        sniff: () => {},
-        throw: () => {},
+        sniff: () => { stage().respond(`You sniff your lint, it smells vaugly of dust, and pocket.`) },
+        throw: () => { actions().drop('lint') },
       },
     },
   },

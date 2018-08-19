@@ -62,6 +62,7 @@ const stage = () => {
       displayContainer(containerId, containersLists[containerId])
       displayThings(containerId, containersLists[containerId])
       displayActions(containerId, containersLists[containerId])
+      displayCombines(containerId, containersLists[containerId])
     }
   }
 
@@ -83,11 +84,21 @@ const stage = () => {
   }
 
   const displayActions = (containerId, container) => {
-    for (itemId of container.items) {
+    for (let itemId of container.items) {
       let actions = things[itemId].actions[container.id]
       for (action in actions) {
-        el(`${containerId}-${itemId}`, `action`).button(action, actions[action])
+        el(`${containerId}-${itemId}`, `action button`).button(action, actions[action])
       }
+    }
+  }
+
+  const displayCombines = (containerId, container) => {
+    for (let itemId of container.items) {
+      let usedIn = things[itemId]['used in']
+      for (let i in usedIn) {
+        el(`${containerId}-${itemId}`, `combo button`).button( usedIn[i], () => {thingsHandler().combine(things[usedIn[i]])} )
+      }
+
     }
   }
 

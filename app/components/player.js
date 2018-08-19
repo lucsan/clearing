@@ -2,7 +2,7 @@ const player = () => {
 
   const showPlayerDetails = (p) => {
     document.dispatchEvent(new Event('clearing_player_loaded'))
-    stage().player(p.name)
+    stage().displayPlayer(p.name)
   }
 
   const newPlayerName = () => {

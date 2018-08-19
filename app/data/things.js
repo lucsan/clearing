@@ -4,10 +4,9 @@ const thingsList = {
     desc: "A nice stick.",
     locs: ['start', 'woods'],
     actions: {
-      // TODO pick up action, not displayed when item is in inv.
       // TODO synonyms for pick up? remove, get, take.
       env: {
-        'pick up': () => thingsHandler().addThingToInventory('stick', true),
+        'pick up': () => actions().pickUp('stick'),
         'kick': () => { stage().respond("You kick the nice stick.") },
       },
       inv: {
@@ -67,7 +66,7 @@ const thingsList = {
     desc: "A mysterious lintstick, it has some pocket lint stuck to it. I wonder what this is for?",
     actions: {
       env: {
-        'pick up': () => thingsHandler().addThingToInventory('lintStick', true),
+        'pick up': () => actions().pickUp('lintStick'),
       },
       inv: {
         give: () => console.log(`Give to gnome`),

@@ -31,15 +31,21 @@ const app = () => {
   const playerLoaded = () => {
     characters().loadCharacters()
     console.log(tools().loadLog());
+    console.log('character', character);
   }
 
   const characterLoaded = () => {
     places = playarea().loadPlaces()
     let t = places[character.location].desc
+    stage().displayThingsInContainers()
     //controls().loadControls()
-    playarea().loadLocation()
+
+    //playarea().loadLocation()
+
     //stage().inventory(character.inventory)
-    stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
+
+    //stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
+
     test()
   }
 

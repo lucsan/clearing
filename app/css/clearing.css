@@ -8,8 +8,8 @@
 .action { color: blue; }
 .combine { color: blue; }
 
-#inventoryList { color: darkblue; }
-
-#location { color: darkgreen; }
+#body { color: brown; }
+#inventory { color: darkblue; }
+#environ { color: darkgreen; }
 
 #exits { color: brown; }

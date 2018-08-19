@@ -1,7 +1,7 @@
 const placesList = {
   // place {id name}: Description (with tokens)
   start: {
-    desc: 'You are standing in a clearing',
+    desc: 'A sun dappled clearing',
     exits: [
       { id: 'north',
         desc: 'A path runs northwards.',

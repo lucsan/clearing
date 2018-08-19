@@ -37,33 +37,15 @@ const game = () => {
       }
     }
     return actions
-
-    // if (typeof(actions[m]) != 'undefined') {
-    //   console.log('found');
-    // }
   }
 
   const getThing = (o) => {
     console.log(o);
   }
 
-
-
-  // const combineThings = (required, produces) => {
-  //
-  // }
-
-  // const listInventory = () => {
-  //   console.log(character.inventory);
-  // }
-
-
   return {
     getThing: getThing,
-    //addThingToInventory: addThingToInventory,
     gatherActions: gatherActionsAtLocation,
-    //listInventory: listInventory,
     playerMove: playerMove,
-    //combine: combineThings,
   }
 }

@@ -6,10 +6,12 @@ const stage = () => {
   const makeDisplays = () => {
     el(undefined, 'display', 'playerDetails').div(`Player: `)
     el(undefined, 'display', 'characterDetails').div(`Character: `)
-    el(undefined, 'display', 'Inventory').div()
-    el(undefined, 'display', 'playArea').div()
+    el(undefined, 'display', 'containers').div()
+    // el(undefined, 'display', 'body').div()
+    // el(undefined, 'display', 'inventory').div()
+    // el(undefined, 'display', 'environ').div()
     el(undefined, 'display', 'respond').div()
-    el(undefined, 'display', 'controls').div()
+  //  el(undefined, 'display', 'controls').div()
     el(undefined, 'display', 'testArea').div()
   }
 
@@ -38,64 +40,57 @@ const stage = () => {
     el('charForm', 'buttonClass', 'charNameOKButton' ).button( 'OK', newCharacter)
   }
 
-  const displayThingsInList = (list, type, displayName) => {
-    el().removeElement(`${displayName}List`)
-    el(`${displayName}`, `${displayName}-contents`, `${displayName}List`).div()
-    el(`${displayName}List`, `title`).div(displayName)
+  const killCharacterForm = () => {
+    el().removeElement('CharacterForm')
+  }
 
-    for (let i in list) {
-      displayThingInList(list[i], type, displayName)
+  const displayCharacter = (name) => {
+    el('characterDetails').div(`${name}`)
+  }
+
+  const displayThingsInContainers = () => {
+    // el().removeElement('containers')
+    // el(undefined, `display`, `containers`).div()
+
+    let containersLists = {
+      body:      { id: 'bod', title: `Holding`,   items: character.body},
+      inventory: { id: 'inv', title: `Inventory`, items: character.inventory},
+      environ:   { id: 'env', title: `${places[character.location].desc}`, items: character.places[character.location]},
+    }
+
+    for (let containerId in containersLists) {
+      displayContainer(containerId, containersLists[containerId])
+      displayThings(containerId, containersLists[containerId])
+      displayActions(containerId, containersLists[containerId])
     }
   }
 
-  const displayThingInList = (id, type, displayName) => {
-    el(`${displayName}List`, `${displayName}-item`, `${displayName}Item-${id}`).div(`${things[id].desc}`)
-    displayThingActions(id, type, displayName)
-    displayThingCombines(id, type, displayName)
-    displayThingProperties(id, type, displayName)
+  const displayContainer = (containerId, container) => {
+    let items = container.items
+    let title = container.title
+    el().removeElement(containerId)
+    el(`containers`, `container`, containerId).div()
+    el(containerId, `title`).div(title)
+    //displayThings(containerId, container)
   }
 
-    const displayThingActions = (id, type, displayName) => {
-      let thing = things[id]
-      if (thing.actions == undefined) return
-      el(`${displayName}Item-${id}`, 'actions', `${displayName}ItemActions-${id}`).div()
-      for (let action in thing.actions[type]) {
-        el(`${displayName}ItemActions-${id}`, `action ${action}`, undefined).button(action, thing.actions[type][action])
+  const displayThings = (containerId, container) => {
+    for (let itemId of container.items) {
+      el(containerId, `things`, `${containerId}-${itemId}`).div()
+      el(`${containerId}-${itemId}`, `thing title`).div(itemId)
+    }
+    //displayActions(containerId, container)
+  }
+
+  const displayActions = (containerId, container) => {
+    for (itemId of container.items) {
+      let actions = things[itemId].actions[container.id]
+      for (action in actions) {
+        el(`${containerId}-${itemId}`, `action`).button(action, actions[action])
       }
     }
+  }
 
-    const displayThingCombines = (id, type, displayName) => {
-      let thing = things[id]
-      if (thing['used in'] == undefined) return
-      let usedIn = thing['used in']
-      el(`${displayName}Item-${id}`, 'combines', `${displayName}ItemCombines-${id}`).div('combines to make ...')
-      for (let i in usedIn) {
-        el(`${displayName}ItemCombines-${id}`, 'combine', undefined).button(usedIn[i], () => {thingsHandler().combine(things[usedIn[i]])})
-      }
-    }
-
-    const displayThingProperties = (id, type, displayName) => {
-      let thing = things[id]
-      if (thing.properties == undefined) return
-      el(`${displayName}Item-${id}`, 'properties', `${displayName}ItemProperties-${id}`).div('Properties ...')
-      for (let property in thing.properties) {
-        el(`${displayName}ItemProperties-${id}`, 'properties', undefined).div(`${property}: ${thing.properties[property]}`)
-      }
-    }
-
-    const placeThingsAtLocation = () => {
-      el().removeElement('things')
-      el('playArea', undefined, 'things').div()
-      el('things', 'title').div("You can see ...")
-
-      for (let i in character.places[character.location]) {
-        let id = character.places[character.location][i]
-        el('things', undefined, `thing-${id}`).div(things[id].desc)
-        for (let act in things[id].actions.env) {
-          el(`thing-${id}`, `action` ).button(act, things[id].actions.env[act])
-        }
-      }
-    }
 
   return {
     respond: respond,
@@ -103,9 +98,9 @@ const stage = () => {
     makePlayerForm: makePlayerForm,
     killPlayerForm: killPlayerForm,
     makeCharacterForm: makeCharacterForm,
-    //inventory: displayInventory,
-    player: displayPlayer,
-    displayThingsInList: displayThingsInList,
-    placeThingsAtLocation: placeThingsAtLocation,
+    displayPlayer: displayPlayer,
+    displayCharacter: displayCharacter,
+    displayThingsInContainers: displayThingsInContainers,
   }
+
 }

@@ -20,6 +20,7 @@ const characters = () => {
   const chooseCharacter = (player) => {
     character = tools().loadData(player.chars[0])
     document.dispatchEvent(new Event('clearing_character_loaded'))
+    //stage().display
     el('characterDetails').div(`${character.name}`)
   }
 

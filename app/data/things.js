@@ -13,13 +13,13 @@ const thingsList = {
         // combines
         // wear - put in bod
         //drop: () => {},
-        hold: () => { console.log(`put in bod`); },
+      //  hold: () => { console.log(`put in bod`); },
         destroy: () => {},
       },
       bod: {
         hit: () => {console.log('you hit');},
         poke: () => {console.log(`you poke`);},
-        bag: () => {console.log(`return to inventory`);}, // put in inv
+        //bag: () => {console.log(`return to inventory`);}, // put in inv
       },
     },
     properties: {
@@ -100,9 +100,10 @@ const thingsList = {
     locs: ['woods'],
     actions: {
       env: {
-        hit: () => console.log(`monster is hit`)
+        //hit: () => console.log(`monster is hit`)
       },
     },
+    strikes: true, // can retaliate    
     properties: {
       attack: 2,
       defense: 0,

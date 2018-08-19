@@ -49,9 +49,7 @@ const stage = () => {
   }
 
   const displayThingsInContainers = () => {
-    // el().removeElement('containers')
-    // el(undefined, `display`, `containers`).div()
-
+    //console.log(character.location);
     let containersLists = {
       body:      { id: 'bod', title: `Holding`,   items: character.body},
       inventory: { id: 'inv', title: `Inventory`, items: character.inventory},
@@ -63,6 +61,7 @@ const stage = () => {
       displayThings(containerId, containersLists[containerId])
       displayActions(containerId, containersLists[containerId])
       displayCombines(containerId, containersLists[containerId])
+      displayPlace()
     }
   }
 
@@ -72,10 +71,13 @@ const stage = () => {
     el().removeElement(containerId)
     el(`containers`, `container`, containerId).div()
     el(containerId, `title`).div(title)
+    el().removeElement(`scene`)
+    el(containerId, `scene`, `scene`).div()
     //displayThings(containerId, container)
   }
 
   const displayThings = (containerId, container) => {
+    //console.log(container.items);
     for (let itemId of container.items) {
       el(containerId, `things`, `${containerId}-${itemId}`).div()
       el(`${containerId}-${itemId}`, `thing title`).div(itemId)
@@ -88,8 +90,22 @@ const stage = () => {
       let actions = things[itemId].actions[container.id]
       for (action in actions) {
         el(`${containerId}-${itemId}`, `action button`).button(action, actions[action])
+
       }
+      displayThingsToHitWith(itemId)
     }
+  }
+
+  const displayThingsToHitWith = (itemId) => {
+    let targets = character.places[character.location]
+    for (let target of targets) {
+      if (things[target].strikes == undefined) return
+        let hitThings = character.body
+        for (let t of hitThings) {
+          el(`environ`).button(`${t} hit`, () => { console.log(`you hit ${itemId} with the ${t}`); }  )
+        }
+    }
+
   }
 
   const displayCombines = (containerId, container) => {
@@ -102,6 +118,17 @@ const stage = () => {
     }
   }
 
+  const displayPlace = () => {
+    let exits = places[character.location].exits
+    el(`scene`, `title`).div(`Exits`)
+    for (let exit of exits) {
+      el(`scene`, `exit`).button(`${exit.desc}`, () => { playarea().exitPlace(exit.to) })
+        //console.log(exit);
+    }
+
+
+  }
+
 
   return {
     respond: respond,
@@ -112,6 +139,7 @@ const stage = () => {
     displayPlayer: displayPlayer,
     displayCharacter: displayCharacter,
     displayThingsInContainers: displayThingsInContainers,
+    displayPlace: displayPlace,
   }
 
 }

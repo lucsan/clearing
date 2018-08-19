@@ -124,9 +124,8 @@ console.log('combining');
 
   // add new item
   character.inventory.push(product.id)
-
-  stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
-
+  tools().storeData(character)
+  stage().displayThingsInContainers()
   }
 
   return {

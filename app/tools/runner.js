@@ -21,14 +21,14 @@ const runner = () => {
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
 
-    thingsHandler().combine(things.lintStick)
+    // thingsHandler().combine(things.lintStick)
     // things.stick.actions.env['pick up']()
     // things.stick.actions.inv['drop']()
     // things.stick.actions.env['pick up']()
     // thingsHandler().combine(things.lintStick)
-    // playarea().exitPlace('woods')
-    // things.stick.actions.env['pick up']()
-    // things.stick.actions.inv['drop']()
+    playarea().exitPlace('woods')
+    things.stick.actions.env['pick up']()
+    actions().hold('stick')
 
     console.log('runner');
     console.log('things', things);

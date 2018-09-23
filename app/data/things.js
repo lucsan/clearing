@@ -112,6 +112,7 @@ const thingsList = {
       drops: 'penny',
     },
   },
+  
   'washing soda': {
     desc: 'A tin of sodium carbonate.',
     locs: ['lab'],

@@ -100,12 +100,12 @@ const stage = () => {
     let targets = character.places[character.location]
     for (let target of targets) {
       if (things[target].strikes == undefined) return
-        let hitThings = character.body
-        for (let weapon of hitThings) {
-          //console.log(things[weapon]);
-          el(`environ`).button(`${weapon} hit`, () => { actions().hit(itemId, weapon) }  )
+      let hitThings = character.body
+      for (let weapon of hitThings) {
+        //console.log(things[weapon]);
+        el(`environ`).button(`${weapon} hit`, () => { actions().hit(itemId, weapon) }  )
 
-        }
+      }
     }
 
   }

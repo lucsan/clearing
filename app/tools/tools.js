@@ -35,6 +35,37 @@ const tools = () => {
     localStorage.clear()
   }
 
+  const queryString = (find = null) => {
+    const href = window.location.href
+    let qss = {}
+    let hrefParts = href.split('?')
+    let qs = null
+    let qsParts = null
+
+    if (hrefParts.length > 1) {
+      qs = hrefParts[1]
+      qsParts = qs.split('&')
+    }
+
+    if (qsParts != null && qsParts.length > 0) {
+      qss = qsParts.map((p) => {
+        let a = p.split('=')
+        if (a.length > 0) {
+          return {name: a[0], value: a[1]}
+        } else {
+          return {name: a[0], value: null}
+        }
+      })
+    }
+
+    if (find) {
+      let found = qss.find((find) => { return qss.name = find})
+      return found.value
+    } else {
+      return qss
+    }
+  }
+
   return {
     log: log,
     info: info,
@@ -42,6 +73,7 @@ const tools = () => {
     loadData: loadData,
     storeData: storeData,
     storeRemoveItem: storeRemoveItem,
+    queryString: queryString,
   }
 
 }

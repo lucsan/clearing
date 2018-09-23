@@ -15,6 +15,10 @@ const runner = () => {
 
   const appLoaded = () => {
 
+        let qs = tools().queryString()
+        let qst = tools().queryString('endat')
+
+        console.log('qst', qst);
     document.getElementById('playerName').value = s.playerName
     document.getElementById('playerNameOKButton').click()
 
@@ -29,7 +33,7 @@ const runner = () => {
     playarea().exitPlace('woods')
     things.stick.actions.env['pick up']()
     actions().hold('stick')
-    actions().hit('littleMonster', 'stick')    
+    actions().hit('littleMonster', 'stick')
 
     console.log('runner');
     console.log('things', things);

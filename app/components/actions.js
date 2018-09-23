@@ -1,5 +1,5 @@
 /*
-global  
+global
 thingsHandler: true,
 character: true,
 places: true,
@@ -42,6 +42,7 @@ const actions = () => {
     console.log('target def', targetObj.properties.defense, 'weapon atk', weaponObj.properties.attack);
 
     console.log(`You hit ${target} for ${dam} damage`);
+    stage().respond(`You hit ${things[target].desc} with ${weapon} for ${dam} damage`)
 
   }
 

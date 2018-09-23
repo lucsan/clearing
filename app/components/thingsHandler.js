@@ -15,9 +15,12 @@ const thingsHandler = () => {
     if (thing.actions == undefined) thing.actions = {}
     if (thing.actions.inv == undefined) thing.actions.inv = {}
     if (thing.actions.bod == undefined) thing.actions.bod = {}
+    if (thing.actions.env == undefined) thing.actions.env = {}
     if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { actions().drop(thing.id) }
     if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { actions().hold(thing.id) }
     if (thing.actions.bod.bagit == undefined) thing.actions.bod['bag it'] = () => { actions().bagit(thing.id) }
+    if (thing.actions.env.look == undefined) thing.actions.env['look'] = () => { stage().respond(thing.desc) }
+
 
     //if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { removeThingFromInventory(thing.id, 'env') }
     //if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { removeThingFromInventory(thing.id, 'bod') }

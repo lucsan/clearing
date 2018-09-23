@@ -92,7 +92,7 @@ const stage = () => {
         el(`${containerId}-${itemId}`, `action button`).button(action, actions[action])
 
       }
-      displayThingsToHitWith(itemId)
+      //displayThingsToHitWith(itemId)
     }
   }
 

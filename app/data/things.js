@@ -2,7 +2,7 @@ const thingsList = {
   /* global actions: true */
   /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
   stick: {
-    desc: "A nice stick.",
+    desc: 'a nice stick.',
     locs: ['start', 'woods'],
     actions: {
       // TODO synonyms for pick up? remove, get, take.
@@ -112,17 +112,27 @@ const thingsList = {
       drops: 'penny',
     },
   },
-  
-  'washing soda': {
+
+  mingVase: {
+    desc: 'a ming dynsaty delicate china vase.',
+    locs: ['woods'],
+    actions: {
+      env: {
+        'pick up': () => actions().pickUp('stick'),
+      },
+    },
+  },
+
+  washingSoda: {
     desc: 'A tin of sodium carbonate.',
     locs: ['lab'],
   },
-  'citric acid': {
-    desc: "A bag of citric acid.",
+  citricAcid: {
+    desc: 'a bag of citric acid.',
     locs: ['lab'],
   },
-  testtube: {
-    desc: "A test tube of dubious cleanliness.",
+  testTube: {
+    desc: 'a test tube of dubious cleanliness.',
     locs: ['lab'],
   }
 

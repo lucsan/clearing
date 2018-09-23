@@ -27,15 +27,9 @@ const runner = () => {
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
     if (endat == 'charLoaded') return
-//console.log('test', test);
-    if (test == 'combine') testCombine()
-    //thingsHandler().combine(things.lintStick)
-//return
 
-    // things.stick.actions.env['pick up']()
-    // things.stick.actions.inv['drop']()
-    // things.stick.actions.env['pick up']()
-    // thingsHandler().combine(things.lintStick)
+    if (test == 'combine') testCombine()
+
     playarea().exitPlace('woods')
     things.stick.actions.env['pick up']()
     actions().hold('stick')
@@ -46,7 +40,10 @@ const runner = () => {
   }
 
   const testCombine = () => {
-    console.log('aaaaa');
+    thingsHandler().combine(things.lintStick)
+    things.stick.actions.env['pick up']()
+    things.stick.actions.inv['drop']()
+    things.stick.actions.env['pick up']()
     thingsHandler().combine(things.lintStick)
   }
 

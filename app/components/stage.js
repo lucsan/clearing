@@ -111,10 +111,11 @@ const stage = () => {
   }
 
   const displayCombines = (containerId, container) => {
+    if (containerId != 'inventory') return
     for (let itemId of container.items) {
       let usedIn = things[itemId]['used in']
       for (let i in usedIn) {
-        el(`${containerId}-${itemId}`, `combo button`).button( usedIn[i], () => {thingsHandler().combine(things[usedIn[i]])} )
+        el(`${containerId}-${itemId}`, `combo button`).button( `Craft: ${usedIn[i]}`, () => {thingsHandler().combine(things[usedIn[i]])} )
       }
 
     }

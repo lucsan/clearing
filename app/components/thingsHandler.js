@@ -18,8 +18,10 @@ const thingsHandler = () => {
     if (thing.actions.env == undefined) thing.actions.env = {}
     if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { actions().drop(thing.id) }
     if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { actions().hold(thing.id) }
-    if (thing.actions.bod.bagit == undefined) thing.actions.bod['bag it'] = () => { actions().bagit(thing.id) }
-    if (thing.actions.env.look == undefined) thing.actions.env['look'] = () => { stage().respond(thing.desc) }
+    if (thing.actions.inv.inspect == undefined) thing.actions.inv.inspect = () => { stage().respond(thing.desc) }
+    if (thing.actions.bod.bagit == undefined) thing.actions.bod.bagit = () => { actions().bagit(thing.id) }
+    if (thing.actions.env.look == undefined) thing.actions.env.look = () => { stage().respond(thing.desc) }
+
 
 
     //if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { removeThingFromInventory(thing.id, 'env') }

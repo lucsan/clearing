@@ -2,13 +2,13 @@ const thingsList = {
   /* global actions: true */
   /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
   stick: {
-    desc: 'a nice stick.',
+    desc: 'a nice stick',
     locs: ['start', 'woods'],
     actions: {
       // TODO synonyms for pick up? remove, get, take.
       env: {
         'pick up': () => actions().pickUp('stick'),
-        'kick': () => { stage().respond("You kick the nice stick.") },
+        'kick': () => { stage().respond('You kick the nice stick') },
       },
       inv: {
         // combines
@@ -32,7 +32,7 @@ const thingsList = {
   },
 
   gnome: {
-    desc: "A nice gnome.",
+    desc: "a nice gnome",
     locs: ['start'],
     actions: {
       env: {
@@ -42,7 +42,7 @@ const thingsList = {
   },
 
   lint: {
-    desc: "Some grey and fluffy lint.",
+    desc: "some grey and fluffy lint",
     locs: ['inv'],
     actions: {
       inv: {
@@ -56,7 +56,7 @@ const thingsList = {
   },
 
   stickyTape: {
-    desc: "A roll of stickytape. Its a tape, which is sticky.",
+    desc: 'a roll of stickytape. Its a tape, which is sticky',
     locs: ['inv'],
     properties: {
       sticking: true,
@@ -64,13 +64,13 @@ const thingsList = {
   },
 
   lintStick: {
-    desc: "A mysterious lintstick, it has some pocket lint stuck to it. I wonder what this is for?",
+    desc: 'a mysterious lintstick, it has some pocket lint stuck to it. I wonder what this is for?',
     actions: {
       env: {
         'pick up': () => actions().pickUp('lintStick'),
       },
       inv: {
-        give: () => console.log(`Give to gnome`),
+        give: () => console.log(`give to gnome`),
         tickling: () => console.log(`You tickle something with it`),
         poking: () => console.log(`you poke something with it`),
       },
@@ -83,7 +83,7 @@ const thingsList = {
     combines: {
       needs: ['stick', 'lint', 'stickyTape'],
       destroys: ['stick', 'lint'],
-      desc: "You use a piece of sticky tape to adhere the lint to your stick. Yay, a lintstick, its more stick than lint and has a sticky linty end.",
+      desc: 'you use a piece of sticky tape to adhere the lint to your stick. Yay, a lintstick, its more stick than lint and it has a sticky linty end',
     },
   },
 
@@ -114,7 +114,7 @@ const thingsList = {
   },
 
   mingVase: {
-    desc: 'a ming dynsaty delicate china vase.',
+    desc: 'a ming dynsaty delicate china vase',
     locs: ['woods'],
     actions: {
       env: {

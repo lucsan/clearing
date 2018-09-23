@@ -92,18 +92,18 @@ const stage = () => {
         el(`${containerId}-${itemId}`, `action button`).button(action, actions[action])
 
       }
-      //displayThingsToHitWith(itemId)
+      displayThingsToHitWith(containerId, itemId)
     }
   }
 
-  const displayThingsToHitWith = (itemId) => {
+  const displayThingsToHitWith = (containerId, itemId) => {
     let targets = character.places[character.location]
     for (let target of targets) {
       if (things[target].strikes == undefined) return
       let hitThings = character.body
       for (let weapon of hitThings) {
         //console.log(things[weapon]);
-        el(`environ`).button(`${weapon} hit`, () => { actions().hit(itemId, weapon) }  )
+        el(`${containerId}-${itemId}`).button(`${weapon} hit`, () => { actions().hit(itemId, weapon) }  )
 
       }
     }

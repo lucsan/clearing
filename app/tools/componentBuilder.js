@@ -7,7 +7,7 @@ const el = (parent = 'app', className = '', id = '' ) => {
 
 
   const testdiv = (className = null) => {
-    e = document.createElement('div')
+    let e = document.createElement('div')
     e.id = s.id
     e.className = className
     e.innerHTML = `new div`

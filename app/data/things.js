@@ -1,5 +1,6 @@
 const thingsList = {
-  //
+  /* global actions: true */
+  /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
   stick: {
     desc: "A nice stick.",
     locs: ['start', 'woods'],
@@ -103,12 +104,25 @@ const thingsList = {
         //hit: () => console.log(`monster is hit`)
       },
     },
-    strikes: true, // can retaliate    
+    strikes: true, // can retaliate
     properties: {
-      attack: 2,
-      defense: 0,
+      attack: 3,
+      defense: 2,
       health: 4,
+      drops: 'penny',
     },
   },
+  'washing soda': {
+    desc: 'A tin of sodium carbonate.',
+    locs: ['lab'],
+  },
+  'citric acid': {
+    desc: "A bag of citric acid.",
+    locs: ['lab'],
+  },
+  testtube: {
+    desc: "A test tube of dubious cleanliness.",
+    locs: ['lab'],
+  }
 
 }

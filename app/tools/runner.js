@@ -29,6 +29,7 @@ const runner = () => {
     playarea().exitPlace('woods')
     things.stick.actions.env['pick up']()
     actions().hold('stick')
+    actions().hit('littleMonster', 'stick')    
 
     console.log('runner');
     console.log('things', things);

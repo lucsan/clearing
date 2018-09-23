@@ -101,8 +101,10 @@ const stage = () => {
     for (let target of targets) {
       if (things[target].strikes == undefined) return
         let hitThings = character.body
-        for (let t of hitThings) {
-          el(`environ`).button(`${t} hit`, () => { console.log(`you hit ${itemId} with the ${t}`); }  )
+        for (let weapon of hitThings) {
+          //console.log(things[weapon]);
+          el(`environ`).button(`${weapon} hit`, () => { actions().hit(itemId, weapon) }  )
+
         }
     }
 

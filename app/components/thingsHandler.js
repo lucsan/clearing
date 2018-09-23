@@ -1,6 +1,6 @@
 const thingsHandler = () => {
 
-/*
+/**
   Things in inventory
   Things in hand (head, chest, etc)
   Things in room
@@ -26,7 +26,7 @@ const thingsHandler = () => {
   const loadThings = () => {
     log('loading things')
     let things = thingsList
-    for (id in things) {
+    for (let id in things) {
       let thing = things[id]
       thing.id = id
       loadThing(thing)
@@ -35,10 +35,10 @@ const thingsHandler = () => {
   }
 
   const loadCombos = () => {
-    for (id in things) {
+    for (let id in things) {
       if (things[id].combines == undefined ) continue
       let thing = things[id]
-      for (needs of thing.combines.needs) {
+      for (let needs of thing.combines.needs) {
         if (things[needs]['used in'] == undefined) { things[needs]['used in'] = [] }
         things[needs]['used in'].push(id)
       }
@@ -90,7 +90,7 @@ const thingsHandler = () => {
 
   const findThingsInInventory = (list) => {
     let found = {}
-    for (i in list) {
+    for (let i in list) {
       found[list[i]] = character.inventory.find(e => { return e == list[i] })
     }
     return found
@@ -101,7 +101,7 @@ const thingsHandler = () => {
     found = findThingsInInventory(product.combines.needs)
     //console.log(found);
     let missing = ''
-    for (t in found) {
+    for (let t in found) {
       if (found[t] === undefined) {
         missing += things[t].desc + ' '
       }
@@ -115,17 +115,17 @@ const thingsHandler = () => {
 console.log('combining');
 
 
-  // Remove destroyed items.
-  for (let i in character.inventory) {
-    if (found[character.inventory[i]]) {
-      character.inventory.splice(i, 1)
+    // Remove destroyed items.
+    for (let i in character.inventory) {
+      if (found[character.inventory[i]]) {
+        character.inventory.splice(i, 1)
+      }
     }
-  }
 
-  // add new item
-  character.inventory.push(product.id)
-  tools().storeData(character)
-  stage().displayThingsInContainers()
+    // add new item
+    character.inventory.push(product.id)
+    tools().storeData(character)
+    stage().displayThingsInContainers()
   }
 
   return {

@@ -58,7 +58,7 @@ const tools = () => {
       })
     }
 
-    if (find) {
+    if (qsParts != null && find) {
       let found = qss.find((find) => { return qss.name = find})
       return found.value
     } else {

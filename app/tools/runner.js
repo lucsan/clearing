@@ -15,17 +15,23 @@ const runner = () => {
 
   const appLoaded = () => {
 
-        let qs = tools().queryString()
-        let qst = tools().queryString('endat')
+    let endat = tools().queryString('endat')
+    let chart = tools().queryString('chart')
+    let test = tools().queryString('test')
 
-        console.log('qst', qst);
+
     document.getElementById('playerName').value = s.playerName
     document.getElementById('playerNameOKButton').click()
+    if (endat == 'playerLoaded') return
 
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
+    if (endat == 'charLoaded') return
+//console.log('test', test);
+    if (test == 'combine') testCombine()
+    //thingsHandler().combine(things.lintStick)
+//return
 
-    // thingsHandler().combine(things.lintStick)
     // things.stick.actions.env['pick up']()
     // things.stick.actions.inv['drop']()
     // things.stick.actions.env['pick up']()
@@ -39,6 +45,10 @@ const runner = () => {
     console.log('things', things);
   }
 
+  const testCombine = () => {
+    console.log('aaaaa');
+    thingsHandler().combine(things.lintStick)
+  }
 
 
 

@@ -4,8 +4,7 @@ const autoload = () => {
   s.fc = 0
 
   const loadFiles = () => {
-    //const path = "/_builds/projects/clearing/"
-    const path = ""
+    const path = ''
 
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
@@ -24,7 +23,7 @@ const autoload = () => {
     s.fl.push(`${path}app/data/lexicon.js`)
 
     s.fc = s.fl.length
-    for (f of s.fl) {
+    for (let f of s.fl) {
       loadScript(f, loaded)
     }
   }
@@ -37,19 +36,19 @@ const autoload = () => {
   }
 
   const loadScript = (uri, callback) => {
-      // Adding the script tag to the head as suggested before
-      var head = document.getElementsByTagName('head')[0]
-      var script = document.createElement('script')
-      script.type = 'text/javascript'
-      script.src = uri
+    // Adding the script tag to the head as suggested before
+    var head = document.getElementsByTagName('head')[0]
+    var script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = uri
 
-      // Then bind the event to the callback function.
-      // There are several events for cross browser compatibility.
-      script.onreadystatechange = callback
-      script.onload = callback
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback
+    script.onload = callback
 
-      // Fire the loading
-      head.appendChild(script)
+    // Fire the loading
+    head.appendChild(script)
   }
 
   return {

@@ -4,7 +4,9 @@ const autoload = () => {
   s.fc = 0
 
   const loadFiles = () => {
-    const path = "/_builds/projects/clearing/"
+    //const path = "/_builds/projects/clearing/"
+    const path = ""
+
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
     s.fl.push(`${path}app/tools/store.js`)

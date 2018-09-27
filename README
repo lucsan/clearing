@@ -1,0 +1,19 @@
+Clearing Project
+
+On a good day this project can be run at https://rawgit.com/lucsan/clearing/master/clearing.html
+
+You are standing in a clearing ...
+
+The project take the classic early graphic adventure/RPC format and runs it straight in the browser.
+
+No setup is required, simply dump the file stack on your drive and drag & drop clearing.html into your browser.
+
+Developed on Chrome.
+
+You can create specific run throughs (for testing) using runner.html and its controller app/tools/runner.js.
+
+New things and places can be added in the app/data/things.js and app/data/places.js.
+
+Default things actions (ie: look, pick up) are defined in app/components/thingsHandler.js.
+
+The current direction of development is one of description over action.

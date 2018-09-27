@@ -108,11 +108,12 @@ const thingsHandler = () => {
     let missing = ''
     for (let t in found) {
       if (found[t] === undefined) {
-        missing += things[t].desc + ' '
+        missing += things[t].desc + ', '
       }
     }
 
     if (missing.length > 0) {
+      missing = missing.slice(0, -2) + '.'
       stage().respond(`missing; ${missing}`)
       return
     }

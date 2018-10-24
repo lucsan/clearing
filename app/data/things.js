@@ -134,6 +134,12 @@ const thingsList = {
   testTube: {
     desc: 'a test tube of dubious cleanliness.',
     locs: ['lab'],
+  },
+  chiBorg: {
+    desc: 'A chicken with a mechanical heart.'
+  },
+  roboken: {
+    desc: 'A robot with a chickens heart.'
   }
 
 }

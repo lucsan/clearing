@@ -1,3 +1,19 @@
+const scriptLoader = (uri, callback) => {
+  // Adding the script tag to the head as suggested before
+  var head = document.getElementsByTagName('head')[0]
+  var script = document.createElement('script')
+  script.type = 'text/javascript'
+  script.src = uri
+
+  // Then bind the event to the callback function.
+  // There are several events for cross browser compatibility.
+  script.onreadystatechange = callback
+  script.onload = callback
+
+  // Fire the loading
+  head.appendChild(script)
+}
+
 const autoload = () => {
   let s = {}
   s.fl = []
@@ -5,9 +21,10 @@ const autoload = () => {
 
   const loadFiles = () => {
     const path = ''
-    s.fl.push(`${path}app/data/places/clearing.js`)    
+    //s.fl.push(`${path}app/data/places/clearing.js`)
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
+    s.fl.push(`${path}app/tools/ajax.js`)
     s.fl.push(`${path}app/tools/store.js`)
     s.fl.push(`${path}app/tools/tokenizer.js`)
     s.fl.push(`${path}app/components/stage.js`)
@@ -24,7 +41,8 @@ const autoload = () => {
 
     s.fc = s.fl.length
     for (let f of s.fl) {
-      loadScript(f, loaded)
+      //loadScript(f, loaded)
+      scriptLoader(f, loaded)
     }
   }
 
@@ -35,24 +53,25 @@ const autoload = () => {
     }
   }
 
-  const loadScript = (uri, callback) => {
-    // Adding the script tag to the head as suggested before
-    var head = document.getElementsByTagName('head')[0]
-    var script = document.createElement('script')
-    script.type = 'text/javascript'
-    script.src = uri
-
-    // Then bind the event to the callback function.
-    // There are several events for cross browser compatibility.
-    script.onreadystatechange = callback
-    script.onload = callback
-
-    // Fire the loading
-    head.appendChild(script)
-  }
+  // const loadScript = (uri, callback) => {
+  //   // Adding the script tag to the head as suggested before
+  //   var head = document.getElementsByTagName('head')[0]
+  //   var script = document.createElement('script')
+  //   script.type = 'text/javascript'
+  //   script.src = uri
+  //
+  //   // Then bind the event to the callback function.
+  //   // There are several events for cross browser compatibility.
+  //   script.onreadystatechange = callback
+  //   script.onload = callback
+  //
+  //   // Fire the loading
+  //   head.appendChild(script)
+  // }
 
   return {
     loadFiles: loadFiles,
+    //loadScript: loadScript,
   }
 
 }

@@ -2,6 +2,8 @@ const runner = () => {
 
   let s = {}
 
+console.log('dd', document.domain);
+  //document.domain = 'site.com'
 
   const main = () => {
     s.playerName = 'MePlayer'
@@ -35,6 +37,24 @@ const runner = () => {
     actions().hold('stick')
     actions().hit('littleMonster', 'stick')
 
+
+// Places description texts.
+// Needs own handler (file),
+// maybe be let not const, and all called desc
+// do they need to be loaded to storage as the use goes along?
+const callback = () => {
+  console.log('clearing desc loaded');
+
+  el().div(clearing_desc)
+
+}
+
+//loadScript('app/data/places/clearing.js', callback)
+scriptLoader('app/data/places/clearing.js', callback)
+
+
+
+
     console.log('runner');
     console.log('things', things);
   }
@@ -46,8 +66,6 @@ const runner = () => {
     things.stick.actions.env['pick up']()
     thingsHandler().combine(things.lintStick)
   }
-
-
 
   return {
     init: () => {

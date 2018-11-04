@@ -1,3 +1,8 @@
 Workout the fighting - hit points, defense, etc.
 
+
+
 Add XHR ajax to load descriptive texts.
+Ajax wont work as there is no server to serve up the target files.
+
+DOM injection

@@ -70,6 +70,24 @@ const tools = () => {
     }
   }
 
+  const loadFile = (uri, callback, type = 'html') => {
+    // Cant do this ad div does not have an src value to load the html with.
+    var head = document.getElementsByTagName('head')[0]
+    var body = document.getElementsByTagName('body')[0]
+    var el = document.createElement('div')
+    el.id = 'htmltext'
+    el.type = 'text/html'
+    el.src = uri
+
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    el.onreadystatechange = callback
+    el.onload = callback
+
+    // Fire the loading
+    body.appendChild(el)
+  }
+
   return {
     log: log,
     info: info,
@@ -78,6 +96,7 @@ const tools = () => {
     storeData: storeData,
     storeRemoveItem: storeRemoveItem,
     queryString: queryString,
+    loadHtml: loadFile,
   }
 
 }

@@ -36,18 +36,10 @@ const app = () => {
 
   const characterLoaded = () => {
     places = playarea().loadPlaces()
-    //let t = places[character.location].desc
+
     stage().displayThingsInContainers()
 
     //console.log(places);
-    //stage().displayPlace()
-    //controls().loadControls()
-
-    //playarea().loadLocation()
-
-    //stage().inventory(character.inventory)
-
-    //stage().displayThingsInList(character.inventory, 'inv', 'Inventory')
 
     test()
   }

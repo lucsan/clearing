@@ -129,20 +129,25 @@ const stage = () => {
     for (let exit of exits) {
       el(`scene`, `exit`).button(`${exit.desc}`, () => { playarea().exitPlace(exit.to) })
     }
-    document.getElementById('prose').innerHTML = place.prose || ''
+    displayProse(place.prose)
+  }
+
+  const displayProse = (prose) => {
+    document.getElementById('prose').innerHTML = prose || ''
   }
 
 
   return {
-    respond: respond,
-    makeDisplays: makeDisplays,
-    makePlayerForm: makePlayerForm,
-    killPlayerForm: killPlayerForm,
-    makeCharacterForm: makeCharacterForm,
-    displayPlayer: displayPlayer,
-    displayCharacter: displayCharacter,
-    displayThingsInContainers: displayThingsInContainers,
-    displayPlace: displayPlace,
+    respond,
+    makeDisplays,
+    makePlayerForm,
+    killPlayerForm,
+    makeCharacterForm,
+    displayPlayer,
+    displayCharacter,
+    displayThingsInContainers,
+    displayPlace,
+    displayProse,
   }
 
 }

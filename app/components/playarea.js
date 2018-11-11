@@ -20,6 +20,7 @@ const playarea = () => {
 
   const proseLoader = (place) => {
     place.prose = eval(`${place.proseScript}_prose`)
+    //stage().displayProse()
   }
 
   const loadExits = (place) => {

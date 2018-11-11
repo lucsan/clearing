@@ -5,8 +5,8 @@ const placesList = {
     proseScript: 'clearing',
     exits: [
       { id: 'north',
-        desc: 'a path runs northwards',
-        to: 'woods',
+        desc: 'a path runs northwards to the Creepy Woods',
+        to: 'creepyWoods',
       },
       {
         id: 'South',
@@ -25,7 +25,7 @@ const placesList = {
       }
     ]
   },
-  woods: {
+  creepyWoods: {
     desc: 'some nice creepy woods',
     exits: [
       {
@@ -37,6 +37,7 @@ const placesList = {
   },
   lab: {
     desc: 'a low rent laboratory, with a cheep bench, an old bunsen burner and a test tube rack',
+    proseScript: 'lab',
     exits: [
       {
         id: 'start',

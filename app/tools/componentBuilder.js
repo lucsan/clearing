@@ -15,7 +15,7 @@ const el = (parent = 'app', className = '', id = '' ) => {
   }
 
   const div = (divText = '') => {
-    e = document.createElement('div')
+    let e = document.createElement('div')
     text(e, divText)
     append(e)
     return e

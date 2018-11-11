@@ -38,19 +38,26 @@ console.log('dd', document.domain);
     actions().hit('littleMonster', 'stick')
 
 
-// Places description texts.
-// Needs own handler (file),
-// maybe be let not const, and all called desc
-// do they need to be loaded to storage as the use goes along?
-const callback = () => {
-  console.log('clearing desc loaded');
-
-  el().div(clearing_desc)
-
-}
-
-//loadScript('app/data/places/clearing.js', callback)
-scriptLoader('app/data/places/clearing.js', callback)
+// // Places description texts.
+// // Needs own handler (file),
+// // maybe be let not const, and all called desc
+// // do they need to be loaded to storage as the use goes along?
+// const callback = () => {
+//   console.log('clearing desc loaded');
+//
+//   let e = document.createElement('div')
+//
+//   e.innerHTML = clearing_desc
+//   e.id = 'cd'
+//
+//   document.getElementById('app').appendChild(e)
+//
+//   //el().div(clearing_desc)
+//
+// }
+//
+// //loadScript('app/data/places/clearing.js', callback)
+// scriptLoader('app/data/places/clearing.js', callback)
 
 
 

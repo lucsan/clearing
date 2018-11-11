@@ -2,15 +2,37 @@ const playarea = () => {
 
   const loadPlaces = () => {
     for (let id in placesList) {
-      placesList[id].id = id
-      for (let i in placesList[id].exits) {
-        if (placesList[id].exits[i].actions == undefined) {
-          placesList[id].exits[i].actions = {}
-          placesList[id].exits[i].actions.leave = () => { exitPlace(placesList[id].exits[i].to) }
-        }
-      }
+      loadPlace(placesList[id], id)
     }
     return  placesList
+  }
+
+  const loadPlace = (place, id) => {
+    place.id = id
+    loadExits(place)
+    loadProse(place)
+  }
+
+  const loadProse = (place) => {
+    if (place.descScript === undefined || place.prose !== undefined) { return }
+    scriptLoader(`app/data/places/${place.descScript}.js`, () => {proseLoader(place)})
+  }
+
+  const proseLoader = (place) => {
+    place.prose = eval(`${place.descScript}_prose`)
+  }
+
+  const loadExits = (place) => {
+    for (let i in place.exits) {
+      loadExit(place.exits[i])
+    }
+  }
+
+  const loadExit = (exit) => {
+    if (exit.actions === undefined) {
+      exit.actions = {}
+      exit.actions.leave = () => exitPlace(exit.to)
+    }
   }
 
   const exitPlace = (exit) => {
@@ -23,42 +45,8 @@ const playarea = () => {
     stage().displayThingsInContainers()
   }
 
-
-
-
-
-  // const loadResponses = (r) => {
-  //   el().removeElement('responses')
-  //   el('playArea', undefined, 'responses').div(r)
-  // }
-
-  // const loadLocationDescription = () => {
-  //   let loc = places[character.location]
-  //   el().removeElement('location')
-  //   el('playArea', undefined , 'location').div()
-  //   el('location', 'title').div(loc.desc)
-  //
-  //   for( let exit of loc.exits ) {
-  //     el('location', undefined, `exit-${exit.id}`).div(exit.desc)
-  //
-  //     for (let i in exit.actions) {
-  //     el(`exit-${exit.id}`, `action`, ``).button(i, exit.actions[i])
-  //     }
-  //   }
-  //
-  //   stage().placeThingsAtLocation()
-  //
-  // }
-
-
-
-
-
   return {
-    loadPlaces: loadPlaces,
-    exitPlace: exitPlace,
-    //loadLocation: loadLocationDescription,
-    //loadResponses: loadResponses,
-
+    loadPlaces,
+    exitPlace,
   }
 }

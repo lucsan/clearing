@@ -2,6 +2,7 @@ const placesList = {
   // place {id name}: Description (with tokens)
   start: {
     desc: 'a sun dappled clearing',
+    descScript: 'clearing',
     exits: [
       { id: 'north',
         desc: 'a path runs northwards',

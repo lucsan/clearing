@@ -11,6 +11,7 @@ const stage = () => {
     // el(undefined, 'display', 'inventory').div()
     // el(undefined, 'display', 'environ').div()
     el(undefined, 'display', 'respond').div()
+    el(undefined, 'display', 'prose').div()
   //  el(undefined, 'display', 'controls').div()
     el(undefined, 'display', 'testArea').div()
   }
@@ -122,14 +123,13 @@ const stage = () => {
   }
 
   const displayPlace = () => {
-    let exits = places[character.location].exits
+    let place = places[character.location]
+    let exits = place.exits
     el(`scene`, `title`).div(`Exits`)
     for (let exit of exits) {
       el(`scene`, `exit`).button(`${exit.desc}`, () => { playarea().exitPlace(exit.to) })
-        //console.log(exit);
     }
-
-
+    document.getElementById('prose').innerHTML = place.prose || ''
   }
 
 

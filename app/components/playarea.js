@@ -10,17 +10,17 @@ const playarea = () => {
   const loadPlace = (place, id) => {
     place.id = id
     loadExits(place)
-    loadProse(place)
+    //loadProse(place)
   }
 
   const loadProse = (place) => {
     if (place.proseScript === undefined || place.prose !== undefined) { return }
-    scriptLoader(`app/data/places/${place.proseScript}.js`, () => {proseLoader(place)})
+    scriptLoader(`app/data/places/${place.proseScript}.js`, () => { proseLoader(place) })
   }
 
   const proseLoader = (place) => {
     place.prose = eval(`${place.proseScript}_prose`)
-    //stage().displayProse()
+    stage().displayProse(place.prose)
   }
 
   const loadExits = (place) => {
@@ -36,18 +36,26 @@ const playarea = () => {
     }
   }
 
-  const exitPlace = (exit) => {
-    log(`leave ${character.location} for ${exit}`);
-    character.location = exit
-    if (character.places[exit] == undefined) {
-      character.places[exit] = store().prepThingsForStorage(exit)
+  const enterPlace = () => {
+    let place = placesList[character.location]
+    loadProse(place)
+    console.log('place', place);
+    if (character.places[character.location] == undefined) {
+      character.places[character.location] = store().prepThingsForStorage(character.location)
     }
     tools().storeData(character.name, character)
     stage().displayThingsInContainers()
   }
 
+  const exitPlace = (nextPlaceId) => {
+    log(`leave ${character.location} for ${nextPlaceId}`)
+    character.location = nextPlaceId
+    enterPlace()
+  }
+
   return {
     loadPlaces,
     exitPlace,
+    enterPlace,
   }
 }

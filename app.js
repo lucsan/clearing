@@ -37,6 +37,9 @@ const app = () => {
   const characterLoaded = () => {
     places = playarea().loadPlaces()
 
+    console.log(character.location);
+    playarea().enterPlace()
+
     stage().displayThingsInContainers()
 
     //console.log(places);

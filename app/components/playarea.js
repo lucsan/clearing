@@ -14,12 +14,12 @@ const playarea = () => {
   }
 
   const loadProse = (place) => {
-    if (place.descScript === undefined || place.prose !== undefined) { return }
-    scriptLoader(`app/data/places/${place.descScript}.js`, () => {proseLoader(place)})
+    if (place.proseScript === undefined || place.prose !== undefined) { return }
+    scriptLoader(`app/data/places/${place.proseScript}.js`, () => {proseLoader(place)})
   }
 
   const proseLoader = (place) => {
-    place.prose = eval(`${place.descScript}_prose`)
+    place.prose = eval(`${place.proseScript}_prose`)
   }
 
   const loadExits = (place) => {

@@ -21,6 +21,7 @@ const autoload = () => {
 
   const loadFiles = () => {
     const path = ''
+    s.fl.push(`${path}app/components/mediator.js`)
     s.fl.push(`${path}app/tools/componentBuilder.js`)
     s.fl.push(`${path}app/tools/tools.js`)
     s.fl.push(`${path}app/tools/store.js`)
@@ -35,7 +36,7 @@ const autoload = () => {
     s.fl.push(`${path}app/data/places.js`)
     s.fl.push(`${path}app/data/things.js`)
     s.fl.push(`${path}app/data/lexicon.js`)
-
+   
     s.fc = s.fl.length
     for (let f of s.fl) {
       //loadScript(f, loaded)

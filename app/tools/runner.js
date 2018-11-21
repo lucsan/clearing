@@ -1,6 +1,9 @@
+let app
+
 const runner = () => {
 
   let s = {}
+
 
 console.log('dd', document.domain);
   //document.domain = 'site.com'
@@ -10,32 +13,40 @@ console.log('dd', document.domain);
     s.charName = 'cheese231'
 
     localStorage.clear()
-    app().init()
+    app = new application()
+    app.init()
 
-    setTimeout(appLoaded, 200)
+    setTimeout(appLoaded, 300)
   }
 
   const appLoaded = () => {
 
-    let endat = tools().queryString('endat')
-    let chart = tools().queryString('chart')
-    let test = tools().queryString('test')
+    let avo = app.avo()
+    let tooly = avo().tools().info('xxx')
+    //
+    // avo().tools().info('runner log test')
+    // console.log('avo', avo);
+
+    let cmd = {}
+    cmd.endat = tools().queryString('endat')
+    cmd.chart = tools().queryString('chart')
+    cmd.test = tools().queryString('test')
 
 
     document.getElementById('playerName').value = s.playerName
     document.getElementById('playerNameOKButton').click()
-    if (endat == 'playerLoaded') return
+    if (cmd.endat == 'playerLoaded') return
 
     document.getElementById('charName').value = s.charName
     document.getElementById('charNameOKButton').click()
-    if (endat == 'charLoaded') return
+    if (cmd.endat == 'charLoaded') return
 
-    if (test == 'combine') testCombine()
+    if (cmd.test == 'combine') testCombine()
 
-    playarea().exitPlace('woods')
-    things.stick.actions.env['pick up']()
-    actions().hold('stick')
-    actions().hit('littleMonster', 'stick')
+    playarea().enterPlace('creepyWoods')
+    // things.stick.actions.env['pick up']()
+    // actions().hold('stick')
+    // actions().hit('littleMonster', 'stick')
 
 
 

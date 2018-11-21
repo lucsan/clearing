@@ -29,6 +29,8 @@ const thingsHandler = () => {
   }
 
   const loadThings = () => {
+    let avo = app.avo()
+    let tooly = avo().tools().info('loading thingos')
     log('loading things')
     let things = thingsList
     for (let id in things) {
@@ -111,7 +113,7 @@ const thingsHandler = () => {
         missing += things[t].desc + ', '
       }
     }
-
+    // See if anything is missing.
     if (missing.length > 0) {
       missing = missing.slice(0, -2) + '.'
       stage().respond(`missing; ${missing}`)

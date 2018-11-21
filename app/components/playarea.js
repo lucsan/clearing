@@ -36,10 +36,13 @@ const playarea = () => {
     }
   }
 
-  const enterPlace = () => {
+  const enterPlace = (nextPlaceId) => {
+    // Code for entering a place.
+    // if allowed to enter ... and newPlaceId exists
+    log(`leave ${character.location} for ${nextPlaceId}`)
+    character.location = nextPlaceId
     let place = placesList[character.location]
     loadProse(place)
-    console.log('place', place);
     if (character.places[character.location] == undefined) {
       character.places[character.location] = store().prepThingsForStorage(character.location)
     }
@@ -47,15 +50,15 @@ const playarea = () => {
     stage().displayThingsInContainers()
   }
 
-  const exitPlace = (nextPlaceId) => {
-    log(`leave ${character.location} for ${nextPlaceId}`)
-    character.location = nextPlaceId
-    enterPlace()
-  }
+  // const exitPlace = (nextPlaceId) => {
+  //   log(`leave ${character.location} for ${nextPlaceId}`)
+  //   character.location = nextPlaceId
+  //   enterPlace()
+  // }
 
   return {
     loadPlaces,
-    exitPlace,
+    //exitPlace,
     enterPlace,
   }
 }

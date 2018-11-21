@@ -127,7 +127,7 @@ const stage = () => {
     let exits = place.exits
     el(`scene`, `title`).div(`Exits`)
     for (let exit of exits) {
-      el(`scene`, `exit`).button(`${exit.desc}`, () => { playarea().exitPlace(exit.to) })
+      el(`scene`, `exit`).button(`${exit.desc}`, () => { playarea().enterPlace(exit.to) })
     }
     displayProse(place.prose)
   }

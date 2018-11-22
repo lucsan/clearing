@@ -22,6 +22,6 @@ rules:
     - allow:
       - log
 globals:
+  app: true
+  stagi: true
   actions: true
-  player: true
-  log: false

@@ -11,6 +11,8 @@ const thingsHandler = (mediator) => {
 
 */
 
+  let stagi = app.stagi()
+
   const loadThing = (thing) => {
     if (thing.locs == undefined) thing.locs = []
     if (thing.actions == undefined) thing.actions = {}
@@ -19,11 +21,9 @@ const thingsHandler = (mediator) => {
     if (thing.actions.env == undefined) thing.actions.env = {}
     if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { actions().drop(thing.id) }
     if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { actions().hold(thing.id) }
-    if (thing.actions.inv.inspect == undefined) thing.actions.inv.inspect = () => { stage().respond(thing.desc) }
+    if (thing.actions.inv.inspect == undefined) thing.actions.inv.inspect = () => { stagi.respond(thing.desc) }
     if (thing.actions.bod.bagit == undefined) thing.actions.bod.bagit = () => { actions().bagit(thing.id) }
-    if (thing.actions.env.look == undefined) thing.actions.env.look = () => { stage().respond(thing.desc) }
-
-
+    if (thing.actions.env.look == undefined) thing.actions.env.look = () => { stagi.respond(thing.desc) }
 
     //if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { removeThingFromInventory(thing.id, 'env') }
     //if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { removeThingFromInventory(thing.id, 'bod') }
@@ -56,7 +56,7 @@ const thingsHandler = (mediator) => {
     if (!removeThingFromContainer(id, currentId)) return
     addThingToContainer(id, targetId)
     mediator.tools().storeData(mediator.character().name, mediator.character())
-    stage(mediator).displayThingsInContainers()
+    stagi.displayThingsInContainers()
   }
 
   const removeThingFromContainer = (id, containerId) => {
@@ -94,7 +94,6 @@ const thingsHandler = (mediator) => {
   const findThingsInInventory = (list) => {
     let found = {}
     for (let i in list) {
-      //found[list[i]] = character.inventory.find(e => { return e == list[i] })
       found[list[i]] = mediator.bagProps('inventory').find(e => { return e == list[i] })
     }
     return found
@@ -111,7 +110,7 @@ const thingsHandler = (mediator) => {
     // See if anything is missing.
     if (missing.length > 0) {
       missing = missing.slice(0, -2) + '.'
-      stage(mediator).respond(`missing; ${missing}`)
+      stagi.respond(`missing; ${missing}`)
       return
     }
     // Remove destroyed items.
@@ -124,16 +123,13 @@ const thingsHandler = (mediator) => {
     // add new item
     items.push(product.id)
     mediator.tools().storeData(mediator.character())
-    stage(mediator).displayThingsInContainers()
+    stagi.displayThingsInContainers()
   }
 
   return {
     things: loadThings,
     combos: loadCombos,
-    //inventory: loadInventory,
     combine: combineThings,
-    //listActions: listActions,
-    //addThingToInventory: addThingToInventory,
     moveThingFromContainerToContainer: moveThingFromContainerToContainer,
   }
 }

@@ -23,6 +23,5 @@ rules:
       - log
 globals:
   actions: true
-  stage: true
-  thingsHandler: true
+  player: true
   log: false

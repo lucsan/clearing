@@ -1,11 +1,13 @@
 const store = () => {
 
-  const prepThingsForStorage = (type = 'inv') => {
-    return prepThingsForStore(type)
+  const prepThingsForStorage = (things, type = 'inv') => {
+    if (type === 'inventory') type = 'inv'
+    if (type === 'body') type = 'bod'
+    return prepThingsForStore(things, type)
   }
 
 
-  const getThingsOutOfStore = (items) => {
+  const getThingsOutOfStore = (items, things) => {
     //console.log(items);
     let ts = {}
     for (let id of items) {
@@ -14,7 +16,7 @@ const store = () => {
     return ts
   }
 
-  const prepThingsForStore = (location = 'inv') => {
+  const prepThingsForStore = (things, location = 'inv') => {
     let items = []
     for (let id in things) {
       if (things[id].locs == undefined) continue
@@ -27,8 +29,21 @@ const store = () => {
     return items
   }
 
+  // const prepThingsForStore1 = (location = 'inv') => {
+  //   let items = []
+  //   for (let id in things) {
+  //     if (things[id].locs == undefined) continue
+  //     for (let loc of things[id].locs) {
+  //       if (loc == location) {
+  //         items.push(id)
+  //       }
+  //     }
+  //   }
+  //   return items
+  // }
+
   return {
-    prepThingsForStorage: prepThingsForStorage,
-    getThingsOutOfStore: getThingsOutOfStore,
+    prepThingsForStorage,
+    getThingsOutOfStore,
   }
 }

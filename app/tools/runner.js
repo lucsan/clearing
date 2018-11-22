@@ -5,7 +5,7 @@ const runner = () => {
   let s = {}
 
 
-console.log('dd', document.domain);
+//console.log('dd', document.domain);
   //document.domain = 'site.com'
 
   const main = () => {
@@ -20,12 +20,6 @@ console.log('dd', document.domain);
   }
 
   const appLoaded = () => {
-
-    let avo = app.avo()
-    let tooly = avo().tools().info('xxx')
-    //
-    // avo().tools().info('runner log test')
-    // console.log('avo', avo);
 
     let cmd = {}
     cmd.endat = tools().queryString('endat')
@@ -43,15 +37,18 @@ console.log('dd', document.domain);
 
     if (cmd.test == 'combine') testCombine()
 
-    playarea().enterPlace('creepyWoods')
-    // things.stick.actions.env['pick up']()
+    //playarea(app.mediator(), app.stage()).enterPlace('creepyWoods')
+
+    //console.log(app.mediator().getProps().stick);
+    app.mediator().getProps().stick.actions.env['pick up']()
     // actions().hold('stick')
     // actions().hit('littleMonster', 'stick')
 
-
+document.addEventListener('testi', () => { console.log('testi') })
+document.dispatchEvent(new Event('testi'))
 
     console.log('runner');
-    console.log('things', things);
+    //console.log('things', things);
   }
 
   const testCombine = () => {

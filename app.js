@@ -1,17 +1,20 @@
 'use strict'
 
-let log = null
-let info = null
-let character = {}
-let things = {}
-let places = {}
+// let log = null
+// let info = null
+// let character = {}
+// let things = {}
+// let places = {}
 
+//let mediator  = {}
 
 const debug = true
 
 function application () {
 //const app = () => {
-  let advocate
+  let mediator
+  let theStage
+  let theStagi
 
   const main = () => {
     autoload().loadFiles()
@@ -21,56 +24,56 @@ function application () {
   }
 
   const runApp = () => {
-    console.log('running');
-
-    log = tools().log
-    info = tools().info
-    things = thingsHandler().things()
-    thingsHandler().combos()
-    stage().makeDisplays()
-    player().playerDetails()
+    console.log('clearing app running');
+    briefMediator()
+    prepairStage()
+    prepaireStagi()
+    //log = mediator.tools().log
+    //info = mediator.tools().info
+    mediator.setProps(thingsHandler(mediator).things())
+    thingsHandler(mediator).combos()
+    theStage.makeDisplays()
+    player(mediator, theStage).playerDetails()
   }
 
-  const avo = () => {
-    console.log('not avo', !advocate, advocate);
-    if (!advocate) { advocate = mediator().init() }
-    return advocate
+  const briefMediator = () => {
+    if (!mediator) { mediator = mediation() }
+    return mediator
   }
 
+  const prepairStage = () => {
+    if (!theStage) theStage = stage(mediator)
+    return theStage
+  }
 
+  const prepaireStagi = () => {
+    if (!theStagi) theStagi = stageInterface(theStage)
+    return theStagi
+  }
 
   const playerLoaded = () => {
-    characters().loadCharacters()
-    console.log(tools().loadLog());
-    console.log('character', character);
+    characters(mediator, theStage).loadCharacters()
+    console.log('log', mediator.tools().loadLog());
+    console.log('character', mediator.character());
   }
 
   const characterLoaded = () => {
-    places = playarea().loadPlaces()
+    //places = playarea(mediator).loadPlaces()
 
-    console.log(character.location);
-    playarea().enterPlace('start')
+    console.log('medi loc', mediator.location());
+    playarea(mediator, theStage).enterPlace('start')
 
-    stage().displayThingsInContainers()
-
-    //console.log(places);
-
-    test()
+    theStage.displayThingsInContainers()
   }
-
-  const test = () => {
-    //let list = character.inventory
-    //stage().displayThingsInList(list, 'inv', 'Inventory')
-  }
-
-
 
   return {
     runApp: runApp,
+    mediator: () => mediator,
+    stage: () => theStage,
+    stagi: () => theStagi,
     init: () => {
       main()
     },
-    avo,
   }
 
 }

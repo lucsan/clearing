@@ -89,13 +89,13 @@ const tools = () => {
   }
 
   return {
-    log: log,
-    info: info,
-    loadLog: loadLog,
-    loadData: loadData,
-    storeData: storeData,
-    storeRemoveItem: storeRemoveItem,
-    queryString: queryString,
+    log,
+    info,
+    loadLog,
+    loadData,
+    storeData,
+    storeRemoveItem,
+    queryString,
     loadHtml: loadFile,
   }
 

@@ -10,7 +10,7 @@ const placesList = {
       },
       {
         id: 'South',
-        desc: 'to the south, a small wooden door',
+        desc: 'to the south, a small wooden mysterious door in a tree',
         to: 'tree',
         actions: {
           'open': () => {},

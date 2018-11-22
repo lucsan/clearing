@@ -1,7 +1,7 @@
 /*
  * Write elements to the stage.
 */
-const stage = () => {
+const stage = (mediator) => {
 
   const makeDisplays = () => {
     el(undefined, 'display', 'playerDetails').div(`Player: `)
@@ -50,11 +50,10 @@ const stage = () => {
   }
 
   const displayThingsInContainers = () => {
-    //console.log(character.location);
     let containersLists = {
-      body:      { id: 'bod', title: `Holding`,   items: character.body},
-      inventory: { id: 'inv', title: `Inventory`, items: character.inventory},
-      environ:   { id: 'env', title: `${places[character.location].desc}`, items: character.places[character.location]},
+      body:      { id: 'bod', title: `Holding`, items: mediator.character().places.body.items },
+      inventory: { id: 'inv', title: `Inventory`, items: mediator.character().places.inventory.items },
+      environ:   { id: 'env', title: `${mediator.set().desc}`, items: mediator.character().places[mediator.location()].items },
     }
 
     for (let containerId in containersLists) {
@@ -74,21 +73,19 @@ const stage = () => {
     el(containerId, `title`).div(title)
     el().removeElement(`scene`)
     el(containerId, `scene`, `scene`).div()
-    //displayThings(containerId, container)
   }
 
   const displayThings = (containerId, container) => {
-    //console.log(container.items);
     for (let itemId of container.items) {
       el(containerId, `things`, `${containerId}-${itemId}`).div()
       el(`${containerId}-${itemId}`, `thing title`).div(itemId)
     }
-    //displayActions(containerId, container)
   }
 
   const displayActions = (containerId, container) => {
+    let props = mediator.getProps()
     for (let itemId of container.items) {
-      let actions = things[itemId].actions[container.id]
+      let actions = props[itemId].actions[container.id]
       for (action in actions) {
         el(`${containerId}-${itemId}`, `action button`).button(action, actions[action])
 
@@ -98,10 +95,11 @@ const stage = () => {
   }
 
   const displayThingsToHitWith = (containerId, itemId) => {
-    let targets = character.places[character.location]
-    for (let target of targets) {
-      if (things[target].strikes == undefined) return
-      let hitThings = character.body
+    //let targets = character.places[character.location]
+    let props = mediator.getProps()
+    for (let target in props) {
+      if (props[target].strikes == undefined) return
+      let hitThings = mediator.character().places.body
       for (let weapon of hitThings) {
         //console.log(things[weapon]);
         el(`${containerId}-${itemId}`).button(`${weapon} hit`, () => { actions().hit(itemId, weapon) }  )
@@ -113,21 +111,22 @@ const stage = () => {
 
   const displayCombines = (containerId, container) => {
     if (containerId != 'inventory') return
+    let props = mediator.getProps()
     for (let itemId of container.items) {
-      let usedIn = things[itemId]['used in']
+      let usedIn = props[itemId]['used in']
       for (let i in usedIn) {
-        el(`${containerId}-${itemId}`, `combo button`).button( `Craft: ${usedIn[i]}`, () => {thingsHandler().combine(things[usedIn[i]])} )
+        el(`${containerId}-${itemId}`, `combo button`).button( `Craft: ${usedIn[i]}`, () => {thingsHandler(mediator).combine(props[usedIn[i]])} )
       }
 
     }
   }
 
   const displayPlace = () => {
-    let place = places[character.location]
+    let place = mediator.set()
     let exits = place.exits
     el(`scene`, `title`).div(`Exits`)
     for (let exit of exits) {
-      el(`scene`, `exit`).button(`${exit.desc}`, () => { playarea().enterPlace(exit.to) })
+      el(`scene`, `exit`).button(`${exit.desc}`, () => { playarea(mediator, app.stage()).enterPlace(exit.to) })
     }
     displayProse(place.prose)
   }

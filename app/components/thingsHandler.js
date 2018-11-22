@@ -1,4 +1,5 @@
-const thingsHandler = () => {
+const thingsHandler = (mediator) => {
+// TODO: Change name to propsDept
 
 /**
   Things in inventory
@@ -29,10 +30,8 @@ const thingsHandler = () => {
   }
 
   const loadThings = () => {
-    let avo = app.avo()
-    let tooly = avo().tools().info('loading thingos')
-    log('loading things')
-    let things = thingsList
+    mediator.log('Loading Things')
+    let things = mediator.propsList()
     for (let id in things) {
       let thing = things[id]
       thing.id = id
@@ -42,6 +41,7 @@ const thingsHandler = () => {
   }
 
   const loadCombos = () => {
+    let things = mediator.propsList()
     for (let id in things) {
       if (things[id].combines == undefined ) continue
       let thing = things[id]
@@ -53,87 +53,78 @@ const thingsHandler = () => {
   }
 
   const moveThingFromContainerToContainer = (id, currentId, targetId) => {
-    if (removeThingFromContainer(id, currentId) === false) return
+    if (!removeThingFromContainer(id, currentId)) return
     addThingToContainer(id, targetId)
-    tools().storeData(character.name, character)
-    stage().displayThingsInContainers()
+    mediator.tools().storeData(mediator.character().name, mediator.character())
+    stage(mediator).displayThingsInContainers()
   }
 
   const removeThingFromContainer = (id, containerId) => {
     switch (containerId) {
-      case 'inv': return removeThing(id, character.inventory)
-      case 'env': return removeThing(id, character.places[character.location])
-      case 'bod': return removeThing(id, character.body)
-      default: return false
+    case 'inv': return removeThing(id, mediator.bagProps('inventory'))
+    case 'env': return removeThing(id, mediator.bagProps(mediator.location()), mediator.location())
+    case 'bod': return removeThing(id, mediator.bagProps('body'))
+    default: return false
     }
   }
 
-  const addThingToContainer = (id, containerId) => {
-    switch (containerId) {
-      case 'inv': return addThing(id, character.inventory)
-      case 'env': return addThing(id, character.places[character.location])
-      case 'bod': return addThing(id, character.body)
-      default: return
-    }
-  }
-
-  const addThing = (id, container) => {
-    container.push(id)
-  }
-
-  const removeThing = (id, container) => {
-    for (let i in container) {
-      if (container[i] == id) {
-        container.splice(i, 1)
+  const removeThing = (id, items) => {
+    for (let i in items) {
+      if (items[i] == id) {
+        items.splice(i, 1)
         return true
       }
     }
     return false
   }
 
-  const addInventoryActions = (thing) => {
-    thing.actions.inv['wear'] = () => {console.log('put in bod');}
+  const addThingToContainer = (id, containerId) => {
+    switch (containerId) {
+    case 'inv': return addThing(id, mediator.bagProps('inventory'))
+    case 'env': return addThing(id, mediator.bagProps(mediator.location()))
+    case 'bod': return addThing(id, mediator.bagProps('body'))
+    default: return
+    }
+  }
+
+  const addThing = (id, contents) => {
+    contents.push(id)
   }
 
   const findThingsInInventory = (list) => {
     let found = {}
     for (let i in list) {
-      found[list[i]] = character.inventory.find(e => { return e == list[i] })
+      //found[list[i]] = character.inventory.find(e => { return e == list[i] })
+      found[list[i]] = mediator.bagProps('inventory').find(e => { return e == list[i] })
     }
     return found
   }
 
   const combineThings = (product) => {
-    //console.log(product);
-    found = findThingsInInventory(product.combines.needs)
-    //console.log(found);
+    let found = findThingsInInventory(product.combines.needs)
     let missing = ''
     for (let t in found) {
       if (found[t] === undefined) {
-        missing += things[t].desc + ', '
+        missing += mediator.getProps()[t].desc + ', '
       }
     }
     // See if anything is missing.
     if (missing.length > 0) {
       missing = missing.slice(0, -2) + '.'
-      stage().respond(`missing; ${missing}`)
+      stage(mediator).respond(`missing; ${missing}`)
       return
     }
-
-console.log('combining');
-
-
     // Remove destroyed items.
-    for (let i in character.inventory) {
-      if (found[character.inventory[i]]) {
-        character.inventory.splice(i, 1)
+    let items = mediator.bagProps('inventory')
+    for (let i in items) {
+      if (found[items[i]]) {
+        items.splice(i, 1)
       }
     }
-
     // add new item
-    character.inventory.push(product.id)
-    tools().storeData(character)
-    stage().displayThingsInContainers()
+    items.push(product.id)
+    mediator.tools().storeData(mediator.character())
+    stage(mediator).displayThingsInContainers()
   }
 
   return {

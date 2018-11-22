@@ -52,10 +52,13 @@ const mediation = () => {
     getProps: () => cabinet.props,
     character,
     bagProps,
+    updateBag: () => { },
     move: (newLocation) => cabinet.character.location = newLocation,
     location: () => cabinet.character.location,
     sets: () => cabinet.sets,
     set: () => cabinet.sets[cabinet.character.location],
-    cabinet: cabinet
+    cabinet: cabinet,
+    storeCharacter: () => cabinet.tools.storeData(cabinet.character.name, cabinet.character),
+    storeLocation: () => cabinet.tools.storeData(cabinet.character.location, cabinet.character)
   }
 }

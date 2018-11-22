@@ -3,7 +3,7 @@ const thingsList = {
   /*eslint no-console: ["error", { allow: ["warn", "error", "log"] }] */
   stick: {
     desc: 'a nice stick',
-    locs: ['start', 'woods'],
+    locs: ['start', 'creepyWoods'],
     actions: {
       // TODO synonyms for pick up? remove, get, take.
       env: {
@@ -98,7 +98,7 @@ const thingsList = {
 
   littleMonster: {
     desc: "Oooh how cute, a little monster",
-    locs: ['woods'],
+    locs: ['creepyWoods'],
     actions: {
       env: {
         //hit: () => console.log(`monster is hit`)
@@ -115,7 +115,7 @@ const thingsList = {
 
   mingVase: {
     desc: 'a ming dynsaty delicate china vase',
-    locs: ['woods'],
+    locs: ['creepyWoods'],
     actions: {
       env: {
         'pick up': () => actions().pickUp('stick'),

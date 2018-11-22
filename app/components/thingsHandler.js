@@ -55,7 +55,7 @@ const thingsHandler = (mediator) => {
   const moveThingFromContainerToContainer = (id, currentId, targetId) => {
     if (!removeThingFromContainer(id, currentId)) return
     addThingToContainer(id, targetId)
-    mediator.tools().storeData(mediator.character().name, mediator.character())
+    mediator.storeCharacter()
     stagi.displayThingsInContainers()
   }
 
@@ -122,7 +122,8 @@ const thingsHandler = (mediator) => {
     }
     // add new item
     items.push(product.id)
-    mediator.tools().storeData(mediator.character())
+    mediator.storeCharacter()
+    //mediator.tools().storeData(mediator.character())
     stagi.displayThingsInContainers()
   }
 

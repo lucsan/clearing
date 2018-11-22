@@ -16,4 +16,4 @@ New things and places can be added in the app/data/things.js and app/data/places
 
 Default things actions (ie: look, pick up) are defined in app/components/thingsHandler.js.
 
-The current direction of development is one of description over action.
+The current direction of development in games terms is one of description over action.

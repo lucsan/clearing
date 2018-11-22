@@ -50,8 +50,7 @@ const playarea = (mediator, stagi) => {
 
     loadProse(mediator.set())
 
-    console.log('enter', mediator.character());
-    mediator.tools().storeData(mediator.character().location, mediator.character())
+    mediator.storeLocation()
     stagi.displayThingsInContainers()
     stagi.respond(`left ${msg}`)
   }

@@ -42,6 +42,7 @@ const playarea = (mediator, stagi) => {
   }
 
   const enterPlace = (nextPlaceId) => {
+    console.log('entering');
     // Code for entering a place.
     // if allowed to enter ... and newPlaceId exists
     let msg = `${mediator.location()} for ${nextPlaceId}`
@@ -50,7 +51,7 @@ const playarea = (mediator, stagi) => {
 
     loadProse(mediator.set())
 
-    mediator.storeLocation()
+    //mediator.storeLocation()
     stagi.displayThingsInContainers()
     stagi.respond(`left ${msg}`)
   }

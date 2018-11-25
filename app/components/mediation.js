@@ -15,8 +15,12 @@ const mediation = () => {
   }
 
   const places = (type) => {
-    if (type === 'inv') type = 'inventory'
-    if (type === 'bod') type = 'body'
+    if (!cabinet.character.places[type]) cabinet.character.places[type] = {}
+    cabinet.character.places[type].items = store().prepThingsForStorage(cabinet.propsList, type)
+    return cabinet.character.places
+  }
+
+  const propBag = (type) => {
     if (!cabinet.character.places[type]) cabinet.character.places[type] = {}
     cabinet.character.places[type].items = store().prepThingsForStorage(cabinet.propsList, type)
     return cabinet.character.places
@@ -27,15 +31,26 @@ const mediation = () => {
       if (e.location) {
         cabinet.character.location = e.location
         cabinet.moves += 1
-        places(cabinet.character.location)
-        places('inventory')
-        places('body')
+        // Save location items list to characters places array.
+        propBag(e.location)
+
+        // Save location item state to location array (store).
+        let set = cabinet.sets[e.location]
+        console.log(set);
+        cabinet.tools.storeData(e.location, set)
+        //let setSaveData = store().prepThingsForStorage(set)
+        //console.log(setSaveData, e.location);
+        //let location = places(cabinet.character.location)
+        //cabinet.tools.storeData(cabinet.character.location, cabinet.character)
       }
+
+      if (e.inventory) propBag('inventory')
+      if (e.body) propBag('body')
+
       if (e.name) cabinet.character.name = e.name
       if (e.health) cabinet.character.health = e.health
       if (e.level) cabinet.character.level = e.level
     })
-
     return cabinet.character
   }
 
@@ -43,12 +58,25 @@ const mediation = () => {
     return cabinet.character.places[bag].items
   }
 
+  const newCharacter = (charName) => {
+    character({
+      name: charName.value,
+      level: 1,
+      health: 100,
+      health_max: 100,
+      location: 'start',
+      inventory: [],
+      body: []
+    })
+    cabinet.tools.storeData(cabinet.character.name, cabinet.character)
+  }
+
   return {
     tools: () => cabinet.tools,
     log: (msg) => cabinet.tools.log(msg),
     propsList: () => cabinet.propsList,
     setProps: (list) => cabinet.props = list,
-    getSetProps: (setId) => {},
+    //getSetProps: (setId) => {},
     getProps: () => cabinet.props,
     character,
     bagProps,
@@ -59,6 +87,7 @@ const mediation = () => {
     set: () => cabinet.sets[cabinet.character.location],
     cabinet: cabinet,
     storeCharacter: () => cabinet.tools.storeData(cabinet.character.name, cabinet.character),
-    storeLocation: () => cabinet.tools.storeData(cabinet.character.location, cabinet.character)
+    //storeLocation: () => cabinet.tools.storeData(cabinet.character.location, cabinet.character)
+    newCharacter,
   }
 }

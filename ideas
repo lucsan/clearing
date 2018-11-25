@@ -1,5 +1,10 @@
 Workout the fighting - hit points, defense, etc.
 
+Rework state saving:-
+
+Save to character places:-
+individual items (item_no ?)
+item state (health, location, properties etc)
 
 
 Add XHR ajax to load descriptive texts.

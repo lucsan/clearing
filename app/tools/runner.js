@@ -37,6 +37,7 @@ const runner = () => {
 
     if (cmd.test == 'combine') testCombine()
 
+
     app.mediator().getProps().stick.actions.env['pick up']()
 
     playarea(app.mediator(), app.stagi()).enterPlace('creepyWoods')

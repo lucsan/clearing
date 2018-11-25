@@ -20,7 +20,6 @@ const characters = (mediator, stage) => {
   const chooseCharacter = (player) => {
     let character = mediator.tools().loadData(player.chars[0])
     document.dispatchEvent(new Event('clearing_character_loaded'))
-    //stage().display
     el('characterDetails').div(`${character.name}`)
   }
 
@@ -35,16 +34,7 @@ const characters = (mediator, stage) => {
 
   const newCharacter = () => {
     let charName = document.getElementById('charName') // TODO move to perform.js
-    mediator.character({
-      name: charName.value,
-      level: 1,
-      health: 100,
-      health_max: 100,
-      location: 'start',
-    })
-
-    mediator.tools().storeData(`${mediator.character().name}`, mediator.character())
-
+    mediator.newCharacter(charName)
     el().removeElement('charForm') // TODO move to stage
     let p = mediator.tools().loadData('player')
     p.chars.push(mediator.character().name)

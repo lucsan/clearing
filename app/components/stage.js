@@ -66,8 +66,6 @@ const stage = (mediator) => {
   }
 
   const displayContainer = (containerId, container) => {
-    console.log('container', containerId,  container);
-    let items = container.items
     let title = container.title
     el().removeElement(containerId)
     el(`containers`, `container`, containerId).div()
@@ -77,24 +75,33 @@ const stage = (mediator) => {
   }
 
   const displayThings = (containerId, container) => {
-    for (let itemId of container.items) {
+    for (let i in container.items) {
+      let itemId = container.items[i].id
       el(containerId, `things`, `${containerId}-${itemId}`).div()
       el(`${containerId}-${itemId}`, `thing title`).div(itemId)
     }
   }
 
   const displayActions = (containerId, container) => {
+    let a = mediatorRequestActions()
     let props = mediator.getProps()
-    console.log(container.items);
-    for (let itemId of container.items) {
-      console.log('prop', itemId);
-      let actions = props[itemId].actions[container.id]
-      for (action in actions) {
-        el(`${containerId}-${itemId}`, `action button`).button(action, actions[action])
+    for (let i in container.items) {
+      let itemId = container.items[i].id
+      let actions = {}
+      if (containerId === 'body') actions = props[itemId].actions['bod']
+      if (containerId === 'inventory') actions = props[itemId].actions['inv']
+      if (containerId === 'environ') actions = props[itemId].actions['env']      
 
+      for (let action in actions) {
+        el(`${containerId}-${itemId}`, 'action button').button(action, actions[action])
       }
       displayThingsToHitWith(containerId, itemId)
     }
+
+  }
+
+  const mediatorRequestActions = () => {
+
   }
 
   const displayThingsToHitWith = (containerId, itemId) => {
@@ -115,7 +122,8 @@ const stage = (mediator) => {
   const displayCombines = (containerId, container) => {
     if (containerId != 'inventory') return
     let props = mediator.getProps()
-    for (let itemId of container.items) {
+    for (let i in container.items) {
+      let itemId = container.items[i].id
       let usedIn = props[itemId]['used in']
       for (let i in usedIn) {
         el(`${containerId}-${itemId}`, `combo button`).button( `Craft: ${usedIn[i]}`, () => {thingsHandler(mediator).combine(props[usedIn[i]])} )

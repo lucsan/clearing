@@ -22,9 +22,10 @@ const store = () => {
       if (things[id].locs == undefined) continue
       for (let loc of things[id].locs) {
         if (loc == location) {
-          let thingProperties = things[id].properties
-          items.push(id)
-          items[id] = {'properties': thingProperties}
+          let item = {}
+          item.id = id
+          item.properties = things[id].properties
+          items.push(item)
         }
       }
     }

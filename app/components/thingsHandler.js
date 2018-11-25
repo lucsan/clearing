@@ -53,8 +53,9 @@ const thingsHandler = (mediator) => {
   }
 
   const moveThingFromContainerToContainer = (id, currentId, targetId) => {
-    if (!removeThingFromContainer(id, currentId)) return
-    addThingToContainer(id, targetId)
+    let item = removeThingFromContainer(id, currentId)
+    if (item === false) return
+    addThingToContainer(targetId, item)
     mediator.storeCharacter()
     stagi.displayThingsInContainers()
   }
@@ -70,25 +71,27 @@ const thingsHandler = (mediator) => {
 
   const removeThing = (id, items) => {
     for (let i in items) {
-      if (items[i] == id) {
+      if (items[i].id == id) {
+        let removedItem = items[i]
         items.splice(i, 1)
-        return true
+        return removedItem
       }
     }
     return false
   }
 
-  const addThingToContainer = (id, containerId) => {
+  const addThingToContainer = (containerId, item) => {
     switch (containerId) {
-    case 'inv': return addThing(id, mediator.bagProps('inventory'))
-    case 'env': return addThing(id, mediator.bagProps(mediator.location()))
-    case 'bod': return addThing(id, mediator.bagProps('body'))
+    case 'inv': return addThing(item, mediator.bagProps('inventory'))
+    case 'env': return addThing(item, mediator.bagProps(mediator.location()))
+    case 'bod': return addThing(item, mediator.bagProps('body'))
     default: return
     }
   }
 
-  const addThing = (id, contents) => {
-    contents.push(id)
+  const addThing = (item, contents) => {
+    console.log(item, contents);
+    contents.push(item)
   }
 
   const findThingsInInventory = (list) => {

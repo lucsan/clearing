@@ -4,7 +4,6 @@ global
 const actions = () => {
   const mediator = app.mediator()
   const stagi = app.stagi()
-  //const stage = stage()
   const thand = thingsHandler(mediator, stage)
 
   const pickUp = (id) => {

@@ -66,6 +66,7 @@ const stage = (mediator) => {
   }
 
   const displayContainer = (containerId, container) => {
+    console.log('container', containerId,  container);
     let items = container.items
     let title = container.title
     el().removeElement(containerId)
@@ -84,7 +85,9 @@ const stage = (mediator) => {
 
   const displayActions = (containerId, container) => {
     let props = mediator.getProps()
+    console.log(container.items);
     for (let itemId of container.items) {
+      console.log('prop', itemId);
       let actions = props[itemId].actions[container.id]
       for (action in actions) {
         el(`${containerId}-${itemId}`, `action button`).button(action, actions[action])

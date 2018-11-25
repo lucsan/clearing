@@ -22,25 +22,14 @@ const store = () => {
       if (things[id].locs == undefined) continue
       for (let loc of things[id].locs) {
         if (loc == location) {
+          let thingProperties = things[id].properties
           items.push(id)
+          items[id] = {'properties': thingProperties}
         }
       }
     }
     return items
   }
-
-  // const prepThingsForStore1 = (location = 'inv') => {
-  //   let items = []
-  //   for (let id in things) {
-  //     if (things[id].locs == undefined) continue
-  //     for (let loc of things[id].locs) {
-  //       if (loc == location) {
-  //         items.push(id)
-  //       }
-  //     }
-  //   }
-  //   return items
-  // }
 
   return {
     prepThingsForStorage,

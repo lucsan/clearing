@@ -3,7 +3,7 @@ Workout the fighting - hit points, defense, etc.
 Rework state saving:-
 
 Save to character places:-
-individual items (item_no ?)
+individual items (item_no ?) or (as is) only 1 of each item.
 item state (health, location, properties etc)
 
 

@@ -51,22 +51,21 @@ const stage = (mediator) => {
 
   const displayThingsInContainers = () => {
     let containersLists = {
-      body:      { id: 'bod', title: `Holding`, items: mediator.character().places.body.items },
-      inventory: { id: 'inv', title: `Inventory`, items: mediator.character().places.inventory.items },
-      environ:   { id: 'env', title: `${mediator.set().desc}`, items: mediator.character().places[mediator.location()].items },
+      body:      { id: 'bod', title: `Holding`, items: mediator.bagProps('body') },
+      inventory: { id: 'inv', title: `Inventory`, items: mediator.bagProps('inventory') },
+      environ:   { id: 'env', title: `${mediator.set().desc}`, items: mediator.bagProps(mediator.location()) },
     }
 
-    for (let containerId in containersLists) {
-      displayContainer(containerId, containersLists[containerId])
-      displayThings(containerId, containersLists[containerId])
-      displayActions(containerId, containersLists[containerId])
-      displayCombines(containerId, containersLists[containerId])
+    for (let id in containersLists) {
+      displayContainer(id, containersLists[id].title)
+      displayThings(id, containersLists[id].items)
+      displayActions(id, containersLists[id].id, containersLists[id].items)
+      displayCombines(id, containersLists[id])
       displayPlace()
     }
   }
 
-  const displayContainer = (containerId, container) => {
-    let title = container.title
+  const displayContainer = (containerId, title) => {
     el().removeElement(containerId)
     el(`containers`, `container`, containerId).div()
     el(containerId, `title`).div(title)
@@ -74,34 +73,22 @@ const stage = (mediator) => {
     el(containerId, `scene`, `scene`).div()
   }
 
-  const displayThings = (containerId, container) => {
-    for (let i in container.items) {
-      let itemId = container.items[i].id
-      el(containerId, `things`, `${containerId}-${itemId}`).div()
-      el(`${containerId}-${itemId}`, `thing title`).div(itemId)
+  const displayThings = (containerId, items) => {
+    for (let i in items) {
+      let iid = items[i].id
+      el(containerId, `things`, `${containerId}-${iid}`).div()
+      el(`${containerId}-${iid}`, `thing title`).div(iid)
     }
   }
 
-  const displayActions = (containerId, container) => {
-    let a = mediatorRequestActions()
-    let props = mediator.getProps()
-    for (let i in container.items) {
-      let itemId = container.items[i].id
-      let actions = {}
-      if (containerId === 'body') actions = props[itemId].actions['bod']
-      if (containerId === 'inventory') actions = props[itemId].actions['inv']
-      if (containerId === 'environ') actions = props[itemId].actions['env']      
-
-      for (let action in actions) {
-        el(`${containerId}-${itemId}`, 'action button').button(action, actions[action])
+  const displayActions = (containerId, typeId, items) => {
+    let itemsActions = mediator.requestThingPlaceActions(typeId, items)
+    for (let i in itemsActions) {
+      for (let action in itemsActions[i].actions) {
+        el(`${containerId}-${itemsActions[i].id}`, 'action button').button(action, itemsActions[i].actions[action])
       }
-      displayThingsToHitWith(containerId, itemId)
+      displayThingsToHitWith(containerId, itemsActions[i].id)
     }
-
-  }
-
-  const mediatorRequestActions = () => {
-
   }
 
   const displayThingsToHitWith = (containerId, itemId) => {

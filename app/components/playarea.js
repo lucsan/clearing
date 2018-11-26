@@ -48,7 +48,7 @@ const playarea = (mediator, stagi) => {
     let msg = `${mediator.location()} for ${nextPlaceId}`
     mediator.log(`leave ${msg}`)
     mediator.character({ location: nextPlaceId })
-
+console.log(nextPlaceId);
     loadProse(mediator.set())
 
     //mediator.storeLocation()

@@ -60,6 +60,7 @@ const mediation = () => {
     return cabinet.character.places[bag].items
   }
 
+
   const newCharacter = (charName) => {
     character({
       name: charName.value,
@@ -71,6 +72,15 @@ const mediation = () => {
       body: []
     })
     cabinet.tools.storeData(cabinet.character.name, cabinet.character)
+  }
+
+  const requestThingPlaceActions = (typeId, items) => {
+    let props = cabinet.props
+    for (let i in items) {
+      let iid = items[i].id
+      items[i].actions = props[iid].actions[typeId]
+    }
+    return items
   }
 
   return {
@@ -90,5 +100,6 @@ const mediation = () => {
     cabinet: cabinet,
     storeCharacter: () => cabinet.tools.storeData(cabinet.character.name, cabinet.character),
     newCharacter,
+    requestThingPlaceActions,
   }
 }

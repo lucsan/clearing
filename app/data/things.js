@@ -4,6 +4,7 @@ const thingsList = {
   stick: {
     desc: 'a nice stick',
     locs: ['start', 'creepyWoods'],
+    artist: 'lucsan',
     actions: {
       // TODO synonyms for pick up? remove, get, take.
       env: {

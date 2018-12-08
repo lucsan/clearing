@@ -3,6 +3,7 @@ const placesList = {
   start: {
     desc: 'a sun dappled clearing',
     proseScript: 'clearing',
+    author: 'lucsan',
     exits: [
       {
         id: 'north',

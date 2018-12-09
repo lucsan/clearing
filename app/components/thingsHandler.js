@@ -30,9 +30,6 @@ const thingsHandler = (mediator) => {
     //if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { removeThingFromInventory(thing.id, 'bod') }
   }
 
-
-
-
   const loadThings = () => {
     mediator.log('Loading Things')
     let things = mediator.propsList()

@@ -55,6 +55,7 @@ function application () {
     characters(mediator, theStage).loadCharacters()
     console.log('log', mediator.tools().loadLog());
     console.log('character', mediator.character());
+    console.log('rigging', mediator.rigging());    
   }
 
   const characterLoaded = () => {

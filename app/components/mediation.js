@@ -11,19 +11,45 @@ const mediation = () => {
       location: 'start',
       places: {
       }
+    },
+    rigging: {
+      newPlayerName: '',
+      characterName: '',
+      places: {},
     }
   }
 
-  const places = (type) => {
-    if (!cabinet.character.places[type]) cabinet.character.places[type] = {}
-    cabinet.character.places[type].items = store().prepThingsForStorage(cabinet.propsList, type)
-    return cabinet.character.places
-  }
+  // const places = (type) => {
+  //   if (!cabinet.character.places[type]) cabinet.character.places[type] = {}
+  //   cabinet.character.places[type].items = store().prepThingsForStorage(cabinet.propsList, type)
+  //   return cabinet.character.places[type].items = prepThingsForRig(type)
+  // }
 
   const propBag = (type) => {
     if (!cabinet.character.places[type]) cabinet.character.places[type] = {}
     cabinet.character.places[type].items = store().prepThingsForStorage(cabinet.propsList, type)
+    prepThingsForRig(type)
     return cabinet.character.places
+  }
+
+  const prepThingsForRig = (type) => {
+    if (!cabinet.rigging.places[type]) cabinet.rigging.places[type] = {}
+    let propsAtLocation = {}
+    let loc = type
+    if (loc === 'inventory') loc = 'inv'
+    if (loc === 'body') loc = 'bod'
+
+    for (let p in cabinet.propsList) {
+      let prop = cabinet.propsList[p]
+      if (prop.locs === undefined) continue
+      prop.locs.map(l => {
+        if (l != loc) return
+        propsAtLocation[p] = prop
+      })
+    }
+    cabinet.rigging.places[type] = propsAtLocation
+//console.log('rigging', type, cabinet.rigging.places);
+    //return
   }
 
   const character = (...v) => {
@@ -37,7 +63,7 @@ const mediation = () => {
         propBag(e.location)
         // Save location item state to location array (store).
         let set = cabinet.sets[e.location]
-        console.log(set);
+        //console.log(set);
         cabinet.tools.storeData(e.location, set)
       }
 
@@ -80,7 +106,7 @@ const mediation = () => {
     for (let i in items) {
       let iid = items[i].id
       items[i].actions = props[iid].actions[typeId]
-      items[i].title = props[iid].title
+      //items[i].title = props[iid].title
     }
     return items
   }
@@ -93,6 +119,7 @@ const mediation = () => {
     //getSetProps: (setId) => {},
     getProps: () => cabinet.props,
     character,
+    rigging: () => cabinet.rigging.places,
     bagProps,
     updateBag: () => { },
     move: (newLocation) => cabinet.character.location = newLocation,

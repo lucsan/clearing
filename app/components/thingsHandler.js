@@ -14,6 +14,7 @@ const thingsHandler = (mediator) => {
   let stagi = app.stagi()
 
   const loadThing = (thing) => {
+    if (thing.title == undefined) thing.title = mediator.tools().makeTitleFromId(thing.id)
     if (thing.locs == undefined) thing.locs = []
     if (thing.actions == undefined) thing.actions = {}
     if (thing.actions.inv == undefined) thing.actions.inv = {}
@@ -28,6 +29,9 @@ const thingsHandler = (mediator) => {
     //if (thing.actions.inv.drop == undefined) thing.actions.inv.drop = () => { removeThingFromInventory(thing.id, 'env') }
     //if (thing.actions.inv.hold == undefined) thing.actions.inv.hold = () => { removeThingFromInventory(thing.id, 'bod') }
   }
+
+
+
 
   const loadThings = () => {
     mediator.log('Loading Things')

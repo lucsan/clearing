@@ -74,11 +74,13 @@ const mediation = () => {
     cabinet.tools.storeData(cabinet.character.name, cabinet.character)
   }
 
+  //TODO: Consider a display array of data for the stage.
   const requestThingPlaceActions = (typeId, items) => {
     let props = cabinet.props
     for (let i in items) {
       let iid = items[i].id
       items[i].actions = props[iid].actions[typeId]
+      items[i].title = props[iid].title
     }
     return items
   }

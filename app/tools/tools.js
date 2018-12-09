@@ -70,22 +70,26 @@ const tools = () => {
     }
   }
 
-  const loadFile = (uri, callback, type = 'html') => {
-    // Cant do this ad div does not have an src value to load the html with.
-    var head = document.getElementsByTagName('head')[0]
-    var body = document.getElementsByTagName('body')[0]
-    var el = document.createElement('div')
-    el.id = 'htmltext'
-    el.type = 'text/html'
-    el.src = uri
+  const makeTitleFromId = (id) => {
+    let title = ''
+    let bits = []
+    let txt = ''
+    let chars = id.split('')
 
-    // Then bind the event to the callback function.
-    // There are several events for cross browser compatibility.
-    el.onreadystatechange = callback
-    el.onload = callback
+    chars.map(c => {
+      if (c == c.toUpperCase()) {
+        bits.push(txt)
+        txt = ''
+      }
+      txt += c
+    })
+    bits.push(txt)
 
-    // Fire the loading
-    body.appendChild(el)
+    bits.map(t => {
+      t = t.charAt(0).toUpperCase() + t.slice(1)
+      title += `${t} `
+    })
+    return title
   }
 
   return {
@@ -96,7 +100,7 @@ const tools = () => {
     storeData,
     storeRemoveItem,
     queryString,
-    loadHtml: loadFile,
+    makeTitleFromId,
   }
 
 }

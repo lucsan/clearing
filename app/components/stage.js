@@ -74,10 +74,11 @@ const stage = (mediator) => {
   }
 
   const displayThings = (containerId, items) => {
+    console.log(items);
     for (let i in items) {
       let iid = items[i].id
       el(containerId, `things`, `${containerId}-${iid}`).div()
-      el(`${containerId}-${iid}`, `thing title`).div(iid)
+      el(`${containerId}-${iid}`, `thing title`).div(items[i].title)
     }
   }
 

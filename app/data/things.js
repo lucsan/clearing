@@ -136,11 +136,15 @@ const thingsList = {
     desc: 'a test tube of dubious cleanliness.',
     locs: ['lab'],
   },
-  chiBorg: {
-    desc: 'A chicken with a mechanical heart.'
+  chiborg: {
+    desc: 'a chicken with a mechanical heart.'
   },
   roboken: {
-    desc: 'A robot with a chickens heart.'
+    desc: 'a robot with a chickens heart.'
+  },
+  vexedSheep: {
+    desc: 'a slightly vexed sheep with fluffy white fleece.',
+    locs: ['funkyHills']
   }
 
 }
